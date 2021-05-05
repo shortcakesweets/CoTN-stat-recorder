@@ -22,4 +22,6 @@ func _start_timer(countdown = 5, tween_duration = 1):
 	timer.start()
 
 func _on_Timer_timeout():
-	self.queue_free()
+	#self.queue_free()
+	self.visible = false
+	pass

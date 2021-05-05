@@ -1,35 +1,14 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://necrosans/necrosans.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://TouchScreen.gd" type="Script" id=2]
+[ext_resource path="res://Five_Second_Timer.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/Cadence/cadence_2.png" type="Texture" id=3]
 [ext_resource path="res://assets/Cadence/cadence_0.png" type="Texture" id=4]
 [ext_resource path="res://assets/Cadence/cadence_3.png" type="Texture" id=5]
 [ext_resource path="res://assets/Cadence/cadence_1.png" type="Texture" id=6]
 [ext_resource path="res://Record_Crypt.gd" type="Script" id=7]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 375, 667 )
-
-[sub_resource type="DynamicFont" id=2]
-size = 80
-font_data = ExtResource( 1 )
-
-[sub_resource type="DynamicFont" id=3]
-size = 32
-font_data = ExtResource( 1 )
-
-[sub_resource type="DynamicFont" id=4]
-size = 32
-outline_size = 1
-outline_color = Color( 0, 0.0156863, 1, 1 )
-font_data = ExtResource( 1 )
-
-[sub_resource type="DynamicFont" id=5]
-size = 60
-font_data = ExtResource( 1 )
-
-[sub_resource type="SpriteFrames" id=6]
+[sub_resource type="SpriteFrames" id=2]
 animations = [ {
 "frames": [ ExtResource( 4 ), ExtResource( 6 ), ExtResource( 3 ), ExtResource( 5 ) ],
 "loop": true,
@@ -37,72 +16,73 @@ animations = [ {
 "speed": 5.0
 } ]
 
+[sub_resource type="DynamicFont" id=3]
+size = 60
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 48
+outline_size = 1
+outline_color = Color( 0, 0.0156863, 1, 1 )
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=7]
+size = 24
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=8]
+size = 24
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 80
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 32
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=9]
+size = 48
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=10]
+size = 24
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=11]
+size = 24
+font_data = ExtResource( 1 )
+
 [node name="Record_Crypt" type="Node2D"]
 script = ExtResource( 7 )
 
-[node name="TouchScreen" type="Area2D" parent="."]
-script = ExtResource( 2 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TouchScreen"]
-position = Vector2( 375, 667 )
-shape = SubResource( 1 )
-
-[node name="Label_Timer" type="Label" parent="."]
-margin_top = 256.0
-margin_right = 752.0
-margin_bottom = 488.0
-custom_fonts/font = SubResource( 2 )
-text = "00:00.00"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Button_Post" type="Button" parent="Label_Timer"]
+[node name="Five_Second_Timer" parent="." instance=ExtResource( 2 )]
 margin_left = 32.0
-margin_top = 232.0
-margin_right = 304.0
-margin_bottom = 344.0
-custom_fonts/font = SubResource( 3 )
-disabled = true
-text = "Post Result"
+margin_top = 272.0
+margin_right = 202.0
+margin_bottom = 458.0
+
+[node name="Control" type="Control" parent="."]
+margin_right = 750.0
+margin_bottom = 1330.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button_Discard" type="Button" parent="Label_Timer"]
-margin_left = 408.0
-margin_top = 232.0
-margin_right = 720.0
-margin_bottom = 344.0
-custom_fonts/font = SubResource( 3 )
-disabled = true
-text = "Discard Result"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
+position = Vector2( 112, 176 )
+scale = Vector2( 4, 4 )
+frames = SubResource( 2 )
+frame = 2
+speed_scale = 2.0
 
-[node name="Label_Seed" type="Label" parent="."]
-margin_left = 480.0
-margin_top = 64.0
-margin_right = 700.0
-margin_bottom = 160.0
-custom_fonts/font = SubResource( 4 )
-text = "Seeded run
-123456"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label_Settings" type="Label" parent="."]
+[node name="Label_Settings" type="Label" parent="Control"]
 visible = false
 margin_top = 680.0
 margin_right = 752.0
 margin_bottom = 1224.0
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 3 )
 text = "division : Enabled
 
 z2 -  00:00.00
@@ -117,13 +97,117 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-position = Vector2( 120, 144 )
-scale = Vector2( 3, 3 )
-frames = SubResource( 6 )
-frame = 2
-speed_scale = 2.0
+[node name="Label_Seed" type="Label" parent="Control"]
+anchor_left = 0.3
+anchor_top = 0.05
+anchor_right = 0.9
+anchor_bottom = 0.15
+custom_fonts/font = SubResource( 4 )
+text = "Seeded run
+123456"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[connection signal="input_event" from="TouchScreen" to="." method="_on_TouchScreen_input_event"]
-[connection signal="input_event" from="TouchScreen" to="TouchScreen" method="_on_TouchScreen_input_event"]
-[connection signal="pressed" from="Label_Timer/Button_Discard" to="." method="_on_Button_Discard_pressed"]
+[node name="random_seed" type="Button" parent="Control/Label_Seed"]
+anchor_top = 1.2
+anchor_right = 0.45
+anchor_bottom = 1.6
+custom_fonts/font = SubResource( 7 )
+text = "random seed"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="enter_seed" type="Button" parent="Control/Label_Seed"]
+anchor_left = 0.55
+anchor_top = 1.2
+anchor_right = 1.0
+anchor_bottom = 1.6
+custom_fonts/font = SubResource( 8 )
+disabled = true
+text = "enter seed"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label_Timer" type="Label" parent="Control"]
+anchor_top = 0.3
+anchor_right = 1.0
+anchor_bottom = 0.45
+custom_fonts/font = SubResource( 5 )
+text = "00:00.000"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button_Post" type="Button" parent="Control/Label_Timer"]
+anchor_left = 0.05
+anchor_top = 1.2
+anchor_right = 0.45
+anchor_bottom = 1.6
+custom_fonts/font = SubResource( 6 )
+disabled = true
+text = "Post Result"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button_Discard" type="Button" parent="Control/Label_Timer"]
+anchor_left = 0.55
+anchor_top = 1.2
+anchor_right = 0.95
+anchor_bottom = 1.6
+custom_fonts/font = SubResource( 6 )
+disabled = true
+text = "Discard Result"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="start_timer" type="Button" parent="Control/Label_Timer"]
+anchor_left = 0.3
+anchor_top = 1.8
+anchor_right = 0.7
+anchor_bottom = 2.2
+custom_fonts/font = SubResource( 9 )
+text = "Start run"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Control/Label_Timer/start_timer"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 2.0
+margin_left = -1.00002
+margin_top = 1.79999
+margin_right = -1.0
+margin_bottom = 1.79999
+custom_fonts/font = SubResource( 10 )
+text = "Timer : 5 second"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button_Return" type="Button" parent="Control"]
+anchor_left = 0.8
+anchor_top = 0.03
+anchor_right = 0.95
+anchor_bottom = 0.07
+custom_fonts/font = SubResource( 11 )
+text = "return"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="Control/Label_Seed/random_seed" to="." method="_on_random_seed_pressed"]
+[connection signal="pressed" from="Control/Label_Timer/Button_Discard" to="." method="_on_Button_Discard_pressed"]
+[connection signal="pressed" from="Control/Label_Timer/start_timer" to="." method="_on_start_timer_pressed"]
+[connection signal="pressed" from="Control/Button_Return" to="." method="_on_Button_Return_pressed"]

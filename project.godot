@@ -21,18 +21,24 @@ _global_script_class_icons={
 [application]
 
 config/name="Cyprt Of The Necrodancer Racing Stats"
-run/main_scene="res://Record_Crypt.tscn"
+run/main_scene="res://CoTN_mainscene.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+Settings="*res://Settings.gd"
 
 [display]
 
 window/size/width=750
 window/size/height=1334
+window/handheld/orientation="portrait"
 
 [global]
 
 emulate=false
 mouse=false
+display=false
 
 [physics]
 

@@ -1,0 +1,121 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://assets/Cadence/cadence_2.png" type="Texture" id=1]
+[ext_resource path="res://assets/Cadence/cadence_0.png" type="Texture" id=2]
+[ext_resource path="res://assets/Cadence/cadence_3.png" type="Texture" id=3]
+[ext_resource path="res://assets/Cadence/cadence_1.png" type="Texture" id=4]
+[ext_resource path="res://necrosans/necrosans.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://CoTN_mainscene.gd" type="Script" id=6]
+
+[sub_resource type="DynamicFont" id=1]
+size = 48
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 36
+font_data = ExtResource( 5 )
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 1 ), ExtResource( 3 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="DynamicFont" id=4]
+size = 48
+font_data = ExtResource( 5 )
+
+[node name="CoTN_mainscene" type="Node2D"]
+script = ExtResource( 6 )
+
+[node name="Control" type="Control" parent="."]
+margin_right = 750.0
+margin_bottom = 1330.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="run_random_seed" type="Button" parent="Control"]
+anchor_left = 0.1
+anchor_top = 0.35
+anchor_right = 0.9
+anchor_bottom = 0.45
+custom_fonts/font = SubResource( 1 )
+text = "run random seed"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="view_stats" type="Button" parent="Control"]
+anchor_left = 0.1
+anchor_top = 0.5
+anchor_right = 0.9
+anchor_bottom = 0.6
+custom_fonts/font = SubResource( 1 )
+disabled = true
+text = "view stats"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="settings" type="Button" parent="Control"]
+anchor_left = 0.1
+anchor_top = 0.65
+anchor_right = 0.9
+anchor_bottom = 0.75
+custom_fonts/font = SubResource( 1 )
+text = "settings"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="search_seed" type="Button" parent="Control"]
+anchor_left = 0.1
+anchor_top = 0.8
+anchor_right = 0.45
+anchor_bottom = 0.9
+custom_fonts/font = SubResource( 2 )
+disabled = true
+text = "Search seed"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="search_player" type="Button" parent="Control"]
+anchor_left = 0.55
+anchor_top = 0.8
+anchor_right = 0.9
+anchor_bottom = 0.9
+custom_fonts/font = SubResource( 2 )
+disabled = true
+text = "search player"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
+position = Vector2( 176, 216 )
+scale = Vector2( 6, 6 )
+frames = SubResource( 3 )
+speed_scale = 2.0
+playing = true
+
+[node name="Label" type="Label" parent="Control"]
+anchor_left = 0.4
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.25
+custom_fonts/font = SubResource( 4 )
+text = "Crypt of The
+ Necrodancer
+
+stat recorder"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="Control/run_random_seed" to="." method="_on_run_random_seed_pressed"]
+[connection signal="pressed" from="Control/settings" to="." method="_on_settings_pressed"]

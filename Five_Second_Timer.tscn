@@ -11,10 +11,10 @@ outline_color = Color( 0, 1, 1, 1 )
 font_data = ExtResource( 3 )
 
 [node name="Five_Second_Timer" type="TextureProgress"]
-margin_left = -50.0
-margin_top = -50.0
-margin_right = 50.0
-margin_bottom = 50.0
+margin_left = -88.0
+margin_top = -96.0
+margin_right = 82.0
+margin_bottom = 90.0
 value = 50.0
 texture_progress = ExtResource( 1 )
 fill_mode = 4

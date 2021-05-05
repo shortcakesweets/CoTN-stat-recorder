@@ -2,56 +2,61 @@ extends Node2D
 
 signal post_run(crypt)
 
-onready var touchscreen = $TouchScreen
-onready var label_timer = $Label_Timer
-onready var label_seed = $Label_Seed
-onready var label_settings = $Label_Settings
+var rng = RandomNumberGenerator.new()
 
-onready var button_post = $Label_Timer/Button_Post
-onready var button_discard = $Label_Timer/Button_Discard
+onready var label_timer = get_node("Control/Label_Timer")
+onready var label_seed = get_node("Control/Label_Seed")
+onready var label_settings = get_node("Control/Label_Settings")
 
-onready var animated_sprite = $AnimatedSprite
+onready var button_post = get_node("Control/Label_Timer/Button_Post")
+onready var button_discard = get_node("Control/Label_Timer/Button_Discard")
+onready var button_start = get_node("Control/Label_Timer/start_timer")
+onready var button_random_seed = get_node("Control/Label_Seed/random_seed")
+
+onready var animated_sprite = get_node("Control/AnimatedSprite")
+
+onready var control = get_node("Control")
+
+onready var five_second_timer = get_node("Five_Second_Timer")
+
 
 var time = 0
 var isTimerOn : bool = false
+var run_prepost : Crypt = Crypt.new()
 
-func _ready():
+func sync_screen_size():
 	var width = get_viewport().size.x
 	var height = get_viewport().size.y
 	
-	print( width, height )
-	
-	# animated_sprite positioning on screen
-	#var offset : Vector2 = Vector2( width / 30 , height / 30 )
-	#var text_size_offset : int = 64
-	
-	#animated_sprite.position = Vector2( width * 0.125 , width * 0.125 ) + offset
-	#animated_sprite.scale = Vector2( width / 250 , width / 250 )
-	
-	# label_seed positioning on screen
-	#label_seed.margin_left = width * (2/3) - offset.x
-	#label_seed.margin_right = width - offset.x
-	
-	#label_seed.margin_top = offset.y
-	#label_seed.margin_bottom = offset.y + width * (1/5)
-	
-	
-	time = 0
-	isTimerOn = false
-	animated_sprite.playing = false
-	
-	#_start_timer()
+	control.margin_right = width
+	control.margin_bottom = height
 
-
-
-
-
+func _ready():
+	
+	sync_screen_size()
+	_reset_timer()
+	five_second_timer.visible = false
+	
+	#button_post.disabled = !isTimerOn
+	#button_discard.disabled = !isTimerOn
 
 func _count_five_seconds():
-	pass
+	five_second_timer._start_timer()
+	
+	var timer = Timer.new()
+	timer.wait_time = 5
+	
+	timer.start()
+	
+	yield(timer, "timeout")
 
 func _start_timer():
+	#_count_five_seconds()
+	
 	isTimerOn = true
+	change_timerButton_state(!isTimerOn)
+	
+	button_random_seed.disabled = true
 
 func _reset_timer():
 	time = 0
@@ -60,6 +65,7 @@ func _reset_timer():
 	var str_elapsed = "00:00.000"
 	label_timer.text = str_elapsed
 	
+	change_timerButton_state(!isTimerOn)
 
 func _process(delta):
 	button_post.disabled = isTimerOn
@@ -76,16 +82,48 @@ func _process(delta):
 	
 	label_timer.text = str_elapsed
 
-func _on_TouchScreen_input_event(_viewport, event, _shape_idx):
+func _on_Button_Discard_pressed():
+	_reset_timer()
+
+func _input(event):
 	if event is InputEventMouseButton :
-		if event.doubleclick :
-			print('double click ', event)
-			isTimerOn = !isTimerOn
-			animated_sprite.playing = isTimerOn
+		if event.doubleclick : 
+			print('double click', event)
+			#isTimerOn = !isTimerOn
+			isTimerOn = false
+			change_timerButton_state(!isTimerOn)
 		else :
 			#print('single click', event)
 			pass
 
+func _on_random_seed_pressed():
+	rng.randomize()
+	
+	run_prepost.random_seed = rng.randi_range(10000, 99999999)
+	label_seed.text = "Seeded Run\n%d" % run_prepost.random_seed
+	pass
 
-func _on_Button_Discard_pressed():
-	_reset_timer()
+func change_timerButton_state(isPause) :
+	button_start.disabled = !isPause
+	#button_start.visible = isPause
+	
+	button_post.disabled = isPause
+	#button_post.visible = !isPause
+	
+	button_discard.disabled = isPause
+	#button_discard.visible = !isPause
+	
+	animated_sprite.playing = !isPause
+	
+	if time != 0:
+		button_start.text = "Resume run"
+		button_random_seed.disabled = true
+	else :
+		button_start.text = "Start run"
+		button_random_seed.disabled = false
+
+func _on_start_timer_pressed():
+	_start_timer()
+
+func _on_Button_Return_pressed():
+	get_tree().change_scene("res://CoTN_mainscene.tscn")
