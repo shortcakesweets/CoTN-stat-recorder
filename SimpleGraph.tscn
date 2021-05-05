@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://SimpleGraph.gd" type="Script" id=1]
+
+[node name="SimpleGraph" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="BG" type="Node2D" parent="."]
+
+[node name="Line2D" type="Line2D" parent="BG"]
+points = PoolVector2Array( 600, 0, 0, 0, 0, -400 )
+
+[node name="Control" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Popup" type="CheckButton" parent="Control"]
+margin_left = 128.0
+margin_top = 64.0
+margin_right = 204.0
+margin_bottom = 104.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
