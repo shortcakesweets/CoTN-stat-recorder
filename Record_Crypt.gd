@@ -56,6 +56,10 @@ func _start_timer():
 func _reset_timer():
 	time = 0
 	isTimerOn = false
+	
+	var str_elapsed = "00:00.000"
+	label_timer.text = str_elapsed
+	
 
 func _process(delta):
 	button_post.disabled = isTimerOn
