@@ -1,0 +1,278 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://Edit_Run.gd" type="Script" id=1]
+[ext_resource path="res://assets/Cadence/cadence_2.png" type="Texture" id=2]
+[ext_resource path="res://assets/Cadence/cadence_0.png" type="Texture" id=3]
+[ext_resource path="res://assets/Cadence/cadence_3.png" type="Texture" id=4]
+[ext_resource path="res://assets/Cadence/cadence_1.png" type="Texture" id=5]
+[ext_resource path="res://necrosans/necrosans.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://icon.png" type="Texture" id=7]
+[ext_resource path="res://Edit_Run_ItemList.gd" type="Script" id=8]
+[ext_resource path="res://GUI_igt.gd" type="Script" id=9]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 3 ), ExtResource( 5 ), ExtResource( 2 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="DynamicFont" id=2]
+size = 48
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 32
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 32
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 32
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 32
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=7]
+size = 32
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=8]
+size = 32
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=9]
+size = 24
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=10]
+size = 24
+font_data = ExtResource( 6 )
+
+[node name="Edit_Run" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+current = true
+
+[node name="Control" type="Control" parent="."]
+margin_right = 750.0
+margin_bottom = 1330.05
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
+position = Vector2( 139.444, 200.265 )
+scale = Vector2( 4, 4 )
+frames = SubResource( 1 )
+speed_scale = 2.0
+playing = true
+
+[node name="seed" type="Label" parent="Control"]
+anchor_left = 0.3
+anchor_top = 0.05
+anchor_right = 0.9
+anchor_bottom = 0.15
+custom_fonts/font = SubResource( 2 )
+text = "seed
+123456"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="rta" type="Label" parent="Control"]
+anchor_left = 0.3
+anchor_top = 0.15
+anchor_right = 0.9
+anchor_bottom = 0.25
+custom_fonts/font = SubResource( 2 )
+text = "rta
+00:00.000"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="igt" type="HBoxContainer" parent="Control"]
+anchor_left = 0.243
+anchor_top = 0.294
+anchor_right = 0.821
+anchor_bottom = 0.371
+margin_left = -1.25001
+margin_top = 29.9644
+margin_right = 6.24997
+margin_bottom = -25.4497
+custom_constants/separation = 16
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="minute" type="LineEdit" parent="Control/igt"]
+margin_right = 106.0
+margin_bottom = 47.0
+custom_fonts/font = SubResource( 3 )
+text = "00"
+align = 1
+max_length = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="colon" type="Label" parent="Control/igt"]
+margin_left = 122.0
+margin_top = 10.0
+margin_right = 128.0
+margin_bottom = 36.0
+custom_fonts/font = SubResource( 4 )
+text = ":"
+valign = 1
+
+[node name="second" type="LineEdit" parent="Control/igt"]
+margin_left = 144.0
+margin_right = 250.0
+margin_bottom = 47.0
+custom_fonts/font = SubResource( 5 )
+text = "00"
+align = 1
+max_length = 2
+
+[node name="dot" type="Label" parent="Control/igt"]
+margin_left = 266.0
+margin_top = 10.0
+margin_right = 272.0
+margin_bottom = 36.0
+custom_fonts/font = SubResource( 6 )
+text = "."
+
+[node name="ms" type="LineEdit" parent="Control/igt"]
+margin_left = 288.0
+margin_right = 394.0
+margin_bottom = 47.0
+custom_fonts/font = SubResource( 7 )
+text = "000"
+align = 1
+max_length = 3
+
+[node name="normal" type="Button" parent="Control"]
+margin_left = 176.0
+margin_top = 522.0
+margin_right = 329.0
+margin_bottom = 599.0
+custom_fonts/font = SubResource( 8 )
+toggle_mode = true
+text = "Normal"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="condor" type="Button" parent="Control"]
+margin_left = 421.651
+margin_top = 519.881
+margin_right = 574.651
+margin_bottom = 596.881
+custom_fonts/font = SubResource( 8 )
+toggle_mode = true
+text = "condor"
+
+[node name="death" type="ItemList" parent="Control"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -255.0
+margin_top = 10.9735
+margin_right = 256.0
+margin_bottom = 433.974
+custom_fonts/font = SubResource( 9 )
+items = [ "1-1", ExtResource( 7 ), false, "1-2", ExtResource( 7 ), false, "1-3", ExtResource( 7 ), false, "1-4", ExtResource( 7 ), false, "2-1", ExtResource( 7 ), false, "2-2", ExtResource( 7 ), false, "2-3", ExtResource( 7 ), false, "2-4", ExtResource( 7 ), false, "3-1", ExtResource( 7 ), false, "3-2", ExtResource( 7 ), false, "3-3", ExtResource( 7 ), false, "3-4", ExtResource( 7 ), false, "4-1", ExtResource( 7 ), false, "4-2", ExtResource( 7 ), false, "4-3", ExtResource( 7 ), false, "4-4", ExtResource( 7 ), false, "5-1", ExtResource( 7 ), false, "5-2", ExtResource( 7 ), false, "5-3", ExtResource( 7 ), false, "5-4", ExtResource( 7 ), false, "", null, true, "5-5", ExtResource( 7 ), false, "WIN!", ExtResource( 7 ), false ]
+max_columns = 4
+same_column_width = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control2" type="Control" parent="."]
+margin_left = 747.622
+margin_right = 1497.62
+margin_bottom = 1330.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="build_maker" type="TabContainer" parent="Control2"]
+margin_left = 70.0
+margin_top = 86.0
+margin_right = 590.0
+margin_bottom = 555.0
+custom_fonts/font = SubResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="ItemList" parent="Control2/build_maker"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 39.0
+margin_right = -4.0
+margin_bottom = -4.0
+items = [ "CourageShovel", ExtResource( 7 ), false, "Axe_titanium", ExtResource( 7 ), false ]
+max_columns = 3
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Floor" type="ItemList" parent="Control2/build_maker"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 39.0
+margin_right = -4.0
+margin_bottom = -4.0
+custom_fonts/font = SubResource( 9 )
+items = [ "1-1", ExtResource( 7 ), false, "1-2", ExtResource( 7 ), false, "1-3", ExtResource( 7 ), false, "1-4", ExtResource( 7 ), false, "2-1", ExtResource( 7 ), false, "2-2", ExtResource( 7 ), false, "2-3", ExtResource( 7 ), false, "2-4", ExtResource( 7 ), false, "3-1", ExtResource( 7 ), false, "3-2", ExtResource( 7 ), false, "3-3", ExtResource( 7 ), false, "3-4", ExtResource( 7 ), false, "4-1", ExtResource( 7 ), false, "4-2", ExtResource( 7 ), false, "4-3", ExtResource( 7 ), false, "4-4", ExtResource( 7 ), false, "5-1", ExtResource( 7 ), false, "5-2", ExtResource( 7 ), false, "5-3", ExtResource( 7 ), false, "5-4", ExtResource( 7 ), false, "", null, true, "5-5", ExtResource( 7 ), false, "WIN!", ExtResource( 7 ), false ]
+max_columns = 4
+same_column_width = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="How" type="ItemList" parent="Control2/build_maker"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 39.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="TextureRect" type="TextureRect" parent="Control2"]
+margin_left = 89.0978
+margin_top = 582.677
+margin_right = 217.098
+margin_bottom = 710.677
+texture = ExtResource( 7 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="give_igt" from="Control/igt" to="." method="_on_igt_give_igt"]
+[connection signal="text_entered" from="Control/igt/minute" to="Control/igt" method="_text_entered"]
+[connection signal="text_entered" from="Control/igt/second" to="Control/igt" method="_text_entered"]
+[connection signal="text_entered" from="Control/igt/ms" to="Control/igt" method="_text_entered"]
+[connection signal="toggled" from="Control/normal" to="." method="_on_normal_toggled"]
+[connection signal="toggled" from="Control/condor" to="." method="_on_condor_toggled"]
+[connection signal="item_selected" from="Control/death" to="." method="_on_death_item_selected"]

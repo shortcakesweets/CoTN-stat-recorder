@@ -127,3 +127,6 @@ func _on_start_timer_pressed():
 
 func _on_Button_Return_pressed():
 	get_tree().change_scene("res://CoTN_mainscene.tscn")
+
+func _on_Button_Post_pressed():
+	get_tree().change_scene("res://Edit_Run.tscn")
