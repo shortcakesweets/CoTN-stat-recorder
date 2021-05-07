@@ -1,6 +1,6 @@
 extends Node2D
 
-signal post_run(crypt)
+#signal post_run(crypt)
 
 var rng = RandomNumberGenerator.new()
 
@@ -22,7 +22,7 @@ onready var five_second_timer = get_node("Five_Second_Timer")
 
 var time = 0
 var isTimerOn : bool = false
-var run_prepost : Crypt = Crypt.new()
+var crypt_raw : Crypt = Crypt.new()
 
 func sync_screen_size():
 	var width = get_viewport().size.x
@@ -37,8 +37,20 @@ func _ready():
 	_reset_timer()
 	five_second_timer.visible = false
 	
+	_on_random_seed_pressed()
+	
 	#button_post.disabled = !isTimerOn
 	#button_discard.disabled = !isTimerOn
+
+func get_data_from_GUI() -> void :
+	# get character data from GUI
+	
+	crypt_raw.rta = time
+	
+	# Random seed is automatically recorded
+	
+	return
+	
 
 func _count_five_seconds():
 	five_second_timer._start_timer()
@@ -99,8 +111,8 @@ func _input(event):
 func _on_random_seed_pressed():
 	rng.randomize()
 	
-	run_prepost.random_seed = rng.randi_range(10000, 99999999)
-	label_seed.text = "Seeded Run\n%d" % run_prepost.random_seed
+	crypt_raw.random_seed = rng.randi_range(10000, 99999999)
+	label_seed.text = "Seeded Run\n%d" % crypt_raw.random_seed
 	pass
 
 func change_timerButton_state(isPause) :
@@ -129,4 +141,10 @@ func _on_Button_Return_pressed():
 	get_tree().change_scene("res://CoTN_mainscene.tscn")
 
 func _on_Button_Post_pressed():
+	get_data_from_GUI()
+	LocalCryptSave.push_crypt_to_array(crypt_raw)
+	
+	# Debug
+	print(LocalCryptSave.crypt_slot)
+	
 	get_tree().change_scene("res://Edit_Run.tscn")

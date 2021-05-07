@@ -8,7 +8,7 @@
 [ext_resource path="res://assets/Cadence/cadence_1.png" type="Texture" id=6]
 [ext_resource path="res://Record_Crypt.gd" type="Script" id=7]
 
-[sub_resource type="SpriteFrames" id=2]
+[sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 4 ), ExtResource( 6 ), ExtResource( 3 ), ExtResource( 5 ) ],
 "loop": true,
@@ -16,41 +16,41 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=2]
 size = 60
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=3]
 size = 48
 outline_size = 1
 outline_color = Color( 0, 0.0156863, 1, 1 )
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=7]
-size = 24
-font_data = ExtResource( 1 )
-
-[sub_resource type="DynamicFont" id=8]
+[sub_resource type="DynamicFont" id=4]
 size = 24
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=5]
-size = 80
-font_data = ExtResource( 1 )
-
-[sub_resource type="DynamicFont" id=6]
-size = 32
-font_data = ExtResource( 1 )
-
-[sub_resource type="DynamicFont" id=9]
-size = 48
-font_data = ExtResource( 1 )
-
-[sub_resource type="DynamicFont" id=10]
 size = 24
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=11]
+[sub_resource type="DynamicFont" id=6]
+size = 80
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=7]
+size = 32
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=8]
+size = 48
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=9]
+size = 24
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=10]
 size = 24
 font_data = ExtResource( 1 )
 
@@ -73,7 +73,7 @@ __meta__ = {
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
 position = Vector2( 112, 176 )
 scale = Vector2( 4, 4 )
-frames = SubResource( 2 )
+frames = SubResource( 1 )
 frame = 2
 speed_scale = 2.0
 
@@ -82,7 +82,7 @@ visible = false
 margin_top = 680.0
 margin_right = 752.0
 margin_bottom = 1224.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 text = "division : Enabled
 
 z2 -  00:00.00
@@ -102,7 +102,7 @@ anchor_left = 0.3
 anchor_top = 0.05
 anchor_right = 0.9
 anchor_bottom = 0.15
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 3 )
 text = "Seeded run
 123456"
 align = 1
@@ -115,7 +115,7 @@ __meta__ = {
 anchor_top = 1.2
 anchor_right = 0.45
 anchor_bottom = 1.6
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 4 )
 text = "random seed"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -126,7 +126,7 @@ anchor_left = 0.55
 anchor_top = 1.2
 anchor_right = 1.0
 anchor_bottom = 1.6
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 5 )
 disabled = true
 text = "enter seed"
 __meta__ = {
@@ -137,7 +137,7 @@ __meta__ = {
 anchor_top = 0.3
 anchor_right = 1.0
 anchor_bottom = 0.45
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 6 )
 text = "00:00.000"
 align = 1
 valign = 1
@@ -150,7 +150,7 @@ anchor_left = 0.05
 anchor_top = 1.2
 anchor_right = 0.45
 anchor_bottom = 1.6
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 7 )
 disabled = true
 text = "Post Result"
 __meta__ = {
@@ -162,7 +162,7 @@ anchor_left = 0.55
 anchor_top = 1.2
 anchor_right = 0.95
 anchor_bottom = 1.6
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 7 )
 disabled = true
 text = "Discard Result"
 __meta__ = {
@@ -174,13 +174,14 @@ anchor_left = 0.3
 anchor_top = 1.8
 anchor_right = 0.7
 anchor_bottom = 2.2
-custom_fonts/font = SubResource( 9 )
+custom_fonts/font = SubResource( 8 )
 text = "Start run"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label" type="Label" parent="Control/Label_Timer/start_timer"]
+visible = false
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 2.0
@@ -188,7 +189,7 @@ margin_left = -1.00002
 margin_top = 1.79999
 margin_right = -1.0
 margin_bottom = 1.79999
-custom_fonts/font = SubResource( 10 )
+custom_fonts/font = SubResource( 9 )
 text = "Timer : 5 second"
 align = 1
 valign = 1
@@ -201,13 +202,14 @@ anchor_left = 0.8
 anchor_top = 0.03
 anchor_right = 0.95
 anchor_bottom = 0.07
-custom_fonts/font = SubResource( 11 )
+custom_fonts/font = SubResource( 10 )
 text = "return"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [connection signal="pressed" from="Control/Label_Seed/random_seed" to="." method="_on_random_seed_pressed"]
+[connection signal="pressed" from="Control/Label_Timer/Button_Post" to="." method="_on_Button_Post_pressed"]
 [connection signal="pressed" from="Control/Label_Timer/Button_Discard" to="." method="_on_Button_Discard_pressed"]
 [connection signal="pressed" from="Control/Label_Timer/start_timer" to="." method="_on_start_timer_pressed"]
 [connection signal="pressed" from="Control/Button_Return" to="." method="_on_Button_Return_pressed"]

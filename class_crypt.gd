@@ -5,6 +5,8 @@ class_name Crypt
 enum {Cadence, Melody, Aria, Dorian, Eli, Monk, Dove, Coda, Bolt, Bard, Nocturna, Diamond, Mary, Tempo, Reaper}
 enum {NORMAL, CoNDOR}
 
+var player_name : String
+
 var Character
 var Mod
 var igt
@@ -35,6 +37,7 @@ class Build :
 	# how : blood_shop, shrine_of_peace, chest, used_transmute etc, idk
 
 func _init():
+	player_name = "Anonymous"
 	Character = Cadence
 	Mod = NORMAL
 	igt = 0
