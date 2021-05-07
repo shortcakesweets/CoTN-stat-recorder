@@ -127,8 +127,27 @@ var build_raw : Crypt.Build = Crypt.Build.new()
 func _on_prev_page_pressed():
 	move_camera(LEFT)
 
+func parse_build(build):
+	var temp = []
+	for i in range(0,len(build)):
+		temp.append({
+			"item" : build[i].item,
+			"where" : build[i].where,
+			"how" : build[i].how
+		})
+	return temp
+	
 func _on_post_pressed():
-	pass # Replace with function body.
+	print("POST RESULT")
+	print(crypt_raw)
+	var http_request = HTTPRequest.new()
+	add_child(http_request)
+	http_request.connect("request_completed", self, "_http_request_completed")
+	
+	var body = {"nick": crypt_raw.player_name, "character": crypt_raw.Character, "mode": crypt_raw.Mod, "igt":crypt_raw.igt, "rta":crypt_raw.rta, "random_seed":crypt_raw.random_seed, "death":crypt_raw.death, "isWin":crypt_raw.isWin, "build":parse_build(crypt_raw.build)}
+	var error = http_request.request("http://3.35.91.222:4500/api/data", ["Content-Type: application/json"], true, HTTPClient.METHOD_POST, to_json(body))
+	if error != OK:
+		push_error("An error occurred in the HTTP request.")
 
 
 func _on_item_item_selected(index):
