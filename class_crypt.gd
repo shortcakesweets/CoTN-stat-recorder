@@ -29,6 +29,12 @@ var division : Array # Array of time (rta's)
 var build : Array # Array of Build
 
 class Build :
+	
+	# Can be AnimatedTexture, StreamTexture, Texture etc
+	var item_texture
+	var where_texture
+	var how_texture
+	
 	var item
 	var where
 	var how

@@ -16,7 +16,8 @@ func _ready():
 func _on_Area2D_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton :
 		if event.doubleclick :
-			print('double click ', event)
+			# Debug
+			#print('double click ', event)
 			pass
 		else :
 			#print('single click', event)

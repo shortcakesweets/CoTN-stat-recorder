@@ -20,7 +20,7 @@ onready var control = get_node("Control")
 onready var five_second_timer = get_node("Five_Second_Timer")
 
 
-var time = 0
+var time : float = 0
 var isTimerOn : bool = false
 var crypt_raw : Crypt = Crypt.new()
 

@@ -1,0 +1,34 @@
+[remap]
+
+importer="texture"
+type="StreamTexture"
+path="res://.import/Scroll_transmute.png-8bc7036f6a7ff5df84ecbe3c8cfc3be0.stex"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://assets/item_icons/spell_icon/Scroll_transmute.png"
+dest_files=[ "res://.import/Scroll_transmute.png-8bc7036f6a7ff5df84ecbe3c8cfc3be0.stex" ]
+
+[params]
+
+compress/mode=0
+compress/lossy_quality=0.7
+compress/hdr_mode=0
+compress/bptc_ldr=0
+compress/normal_map=0
+flags/repeat=0
+flags/filter=true
+flags/mipmaps=false
+flags/anisotropic=false
+flags/srgb=2
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/HDR_as_SRGB=false
+process/invert_color=false
+stream=false
+size_limit=0
+detect_3d=true
+svg/scale=1.0
