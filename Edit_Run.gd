@@ -110,6 +110,11 @@ func _on_igt_give_igt(time):
 func _on_next_page_pressed():
 	move_camera(RIGHT)
 
+func _on_return_pressed():
+	# Print a caution message
+	
+	get_tree().change_scene("res://CoTN_mainscene.tscn")
+
 ###########################################
 ########### Control 2 implement ###########
 ###########################################
@@ -128,7 +133,32 @@ onready var GUI_view_how = get_node("Control2/view_how")
 
 onready var GUI_label_showing_build = get_node("Control2/add_to_build/added_build_label")
 
+onready var Button_post = get_node("Control2/post")
+onready var Button_prev_page = get_node("Control2/prev_page")
+onready var Button_add_build = get_node("Control2/add_to_build")
+onready var Button_delete_build = get_node("Control2/delete_build")
+
 var build_raw : Crypt.Build = Crypt.Build.new()
+
+var processing_post : bool = false
+
+func _process(_delta):
+	if GUI_build_item.is_anything_selected() && GUI_build_floor.is_anything_selected() && GUI_build_how.is_anything_selected() :
+		if processing_post == true :
+			return
+		
+		# you can press add_to_build now
+		Button_add_build.disabled = false
+	else : 
+		Button_add_build.disabled = true
+
+func _button_control(isPost : bool) :
+	processing_post = isPost
+	
+	Button_post.disabled = isPost
+	Button_prev_page.disabled = isPost
+	Button_add_build.disabled = isPost
+	Button_delete_build.disabled = isPost
 
 func _on_prev_page_pressed():
 	move_camera(LEFT)
@@ -145,6 +175,7 @@ func parse_build(build):
 	
 func _on_post_pressed():
 	cook_crypt_from_GUI()
+	_button_control(true)
 	
 	print("POST RESULT")
 	print(crypt_raw)
@@ -156,6 +187,12 @@ func _on_post_pressed():
 	var error = http_request.request("http://3.35.91.222:4500/api/data", ["Content-Type: application/json"], true, HTTPClient.METHOD_POST, to_json(body))
 	if error != OK:
 		push_error("An error occurred in the HTTP request.")
+	
+	_button_control(false)
+	
+	# If you don't want to return to menu, make this line commentary:
+	if error == OK :
+		_on_return_pressed()
 
 func cook_crypt_from_GUI() -> void:
 	# Mod, igt, rta, random_seed, death, build are already cooked automatically
@@ -176,8 +213,6 @@ func cook_crypt_from_GUI() -> void:
 	#################################
 	
 	return
-
-
 
 func _on_item_item_selected(index):
 	build_raw.item_texture = GUI_build_item.get_item_icon(index)
@@ -263,11 +298,6 @@ func print_build_in_sentence() -> void:
 		full_sentence += sentence
 		
 	GUI_label_showing_build.text = full_sentence
-
-func _on_return_pressed():
-	# Print a caution message
-	
-	get_tree().change_scene("res://CoTN_mainscene.tscn")
 
 
 
