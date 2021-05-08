@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=2]
+[gd_scene load_steps=150 format=2]
 
 [ext_resource path="res://Edit_Run.gd" type="Script" id=1]
 [ext_resource path="res://assets/Cadence/cadence_2.png" type="Texture" id=2]
@@ -6,45 +6,132 @@
 [ext_resource path="res://assets/Cadence/cadence_3.png" type="Texture" id=4]
 [ext_resource path="res://assets/Cadence/cadence_1.png" type="Texture" id=5]
 [ext_resource path="res://necrosans/necrosans.ttf" type="DynamicFontData" id=6]
-[ext_resource path="res://icon.png" type="Texture" id=7]
+[ext_resource path="res://assets/item_icons/shovel/blood.png" type="Texture" id=7]
 [ext_resource path="res://ND_item_list.gd" type="Script" id=8]
 [ext_resource path="res://GUI_igt.gd" type="Script" id=9]
-[ext_resource path="res://assets/item_icons/tile_icon/Wall_catacomb.png" type="Texture" id=10]
-[ext_resource path="res://assets/item_icons/tile_icon/Wall_dirt_z5.png" type="Texture" id=11]
-[ext_resource path="res://assets/item_icons/weapon_icon/lute/lute_4.png" type="Texture" id=12]
-[ext_resource path="res://assets/item_icons/weapon_icon/lute/lute_2.png" type="Texture" id=13]
-[ext_resource path="res://assets/item_icons/tile_icon/Wall_stone_z4.png" type="Texture" id=14]
-[ext_resource path="res://assets/item_icons/weapon_icon/lute/lute_3.png" type="Texture" id=15]
-[ext_resource path="res://assets/item_icons/tile_icon/Wall_dirt_z4.png" type="Texture" id=16]
-[ext_resource path="res://assets/item_icons/tile_icon/Wall_catacomb_z4.png" type="Texture" id=17]
-[ext_resource path="res://assets/item_icons/weapon_icon/lute/lute_0.png" type="Texture" id=18]
-[ext_resource path="res://assets/item_icons/tile_icon/Wall_stone_cold.png" type="Texture" id=19]
-[ext_resource path="res://assets/item_icons/tile_icon/Wall_catacomb_z5.png" type="Texture" id=20]
-[ext_resource path="res://assets/item_icons/weapon_icon/lute/lute_6.png" type="Texture" id=21]
-[ext_resource path="res://assets/item_icons/tile_icon/Wall_dirt_z2.png" type="Texture" id=22]
-[ext_resource path="res://assets/item_icons/tile_icon/Wall_dirt.png" type="Texture" id=23]
-[ext_resource path="res://assets/item_icons/tile_icon/Wall_stone_z5.png" type="Texture" id=24]
-[ext_resource path="res://assets/item_icons/tile_icon/Wall_stone_z2.png" type="Texture" id=25]
-[ext_resource path="res://assets/item_icons/tile_icon/Wall_dirt_hot.png" type="Texture" id=26]
-[ext_resource path="res://assets/item_icons/tile_icon/Wall_shop.png" type="Texture" id=27]
-[ext_resource path="res://assets/item_icons/tile_icon/Wall_stone.png" type="Texture" id=28]
-[ext_resource path="res://assets/item_icons/tile_icon/Wall_stage.png" type="Texture" id=29]
-[ext_resource path="res://assets/item_icons/weapon_icon/lute/lute_1.png" type="Texture" id=30]
-[ext_resource path="res://assets/item_icons/shovel_icon/CourageShovel.png" type="Texture" id=31]
-[ext_resource path="res://assets/item_icons/shovel_icon/Blood_Shovel.png" type="Texture" id=32]
-[ext_resource path="res://assets/item_icons/shovel_icon/Shovel_Crystal.png" type="Texture" id=33]
-[ext_resource path="res://assets/item_icons/shovel_icon/StrengthShovel.png" type="Texture" id=34]
-[ext_resource path="res://assets/item_icons/shovel_icon/GlassShovel.png" type="Texture" id=35]
-[ext_resource path="res://assets/item_icons/weapon_icon/Weapon_staff.png" type="Texture" id=36]
-[ext_resource path="res://assets/item_icons/weapon_icon/Weapon_dagger_jeweled.png" type="Texture" id=37]
-[ext_resource path="res://assets/item_icons/weapon_icon/Weapon_dagger_phasing.png" type="Texture" id=38]
-[ext_resource path="res://assets/item_icons/weapon_icon/Weapon_harp.png" type="Texture" id=39]
-[ext_resource path="res://assets/item_icons/weapon_icon/Weapon_cat.png" type="Texture" id=40]
-[ext_resource path="res://assets/item_icons/weapon_icon/Weapon_dagger_frost.png" type="Texture" id=41]
-[ext_resource path="res://assets/item_icons/weapon_icon/Weapon_electric_dagger.png" type="Texture" id=42]
-[ext_resource path="res://assets/item_icons/weapon_icon/Weapon_rapier.png" type="Texture" id=43]
-[ext_resource path="res://assets/item_icons/weapon_icon/Axe.png" type="Texture" id=44]
-[ext_resource path="res://assets/item_icons/weapon_icon/Weapon_spear.png" type="Texture" id=45]
+[ext_resource path="res://assets/item_icons/tile/Wall_catacomb.png" type="Texture" id=10]
+[ext_resource path="res://assets/item_icons/tile/Wall_dirt_z5.png" type="Texture" id=11]
+[ext_resource path="res://assets/item_icons/weapon/lute/lute_4.png" type="Texture" id=12]
+[ext_resource path="res://assets/item_icons/weapon/lute/lute_2.png" type="Texture" id=13]
+[ext_resource path="res://assets/item_icons/tile/Wall_stone_z4.png" type="Texture" id=14]
+[ext_resource path="res://assets/item_icons/weapon/lute/lute_3.png" type="Texture" id=15]
+[ext_resource path="res://assets/item_icons/tile/Wall_dirt_z4.png" type="Texture" id=16]
+[ext_resource path="res://assets/item_icons/tile/Wall_catacomb_z4.png" type="Texture" id=17]
+[ext_resource path="res://assets/item_icons/weapon/lute/lute_0.png" type="Texture" id=18]
+[ext_resource path="res://assets/item_icons/tile/Wall_stone_cold.png" type="Texture" id=19]
+[ext_resource path="res://assets/item_icons/tile/Wall_catacomb_z5.png" type="Texture" id=20]
+[ext_resource path="res://assets/item_icons/weapon/lute/lute_6.png" type="Texture" id=21]
+[ext_resource path="res://assets/item_icons/tile/Wall_dirt_z2.png" type="Texture" id=22]
+[ext_resource path="res://assets/item_icons/tile/Wall_dirt.png" type="Texture" id=23]
+[ext_resource path="res://assets/item_icons/tile/Wall_stone_z5.png" type="Texture" id=24]
+[ext_resource path="res://assets/item_icons/tile/Wall_stone_z2.png" type="Texture" id=25]
+[ext_resource path="res://assets/item_icons/tile/Wall_dirt_hot.png" type="Texture" id=26]
+[ext_resource path="res://assets/item_icons/tile/Wall_shop.png" type="Texture" id=27]
+[ext_resource path="res://assets/item_icons/tile/Wall_stone.png" type="Texture" id=28]
+[ext_resource path="res://assets/item_icons/tile/Wall_stage.png" type="Texture" id=29]
+[ext_resource path="res://assets/item_icons/weapon/lute/lute_1.png" type="Texture" id=30]
+[ext_resource path="res://assets/item_icons/shovel/courage.png" type="Texture" id=31]
+[ext_resource path="res://assets/item_icons/armor/glass.png" type="Texture" id=32]
+[ext_resource path="res://assets/item_icons/armor/gi.png" type="Texture" id=33]
+[ext_resource path="res://assets/item_icons/armor/obsidian.png" type="Texture" id=34]
+[ext_resource path="res://assets/item_icons/armor/heavyplate.png" type="Texture" id=35]
+[ext_resource path="res://assets/item_icons/armor/leather.png" type="Texture" id=36]
+[ext_resource path="res://assets/item_icons/armor/heavyglass.png" type="Texture" id=37]
+[ext_resource path="res://assets/item_icons/armor/platemail.png" type="Texture" id=38]
+[ext_resource path="res://assets/item_icons/armor/quartz.png" type="Texture" id=39]
+[ext_resource path="res://assets/item_icons/armor/chainmail.png" type="Texture" id=40]
+[ext_resource path="res://assets/item_icons/head/sunglasses.png" type="Texture" id=41]
+[ext_resource path="res://assets/object_icons/Dungeon_master.png" type="Texture" id=42]
+[ext_resource path="res://assets/item_icons/head/glass_jaw.png" type="Texture" id=43]
+[ext_resource path="res://assets/object_icons/shopkeeper.png" type="Texture" id=44]
+[ext_resource path="res://assets/object_icons/Chest.png" type="Texture" id=45]
+[ext_resource path="res://assets/object_icons/Travelrune.png" type="Texture" id=46]
+[ext_resource path="res://assets/item_icons/feet/lunging.png" type="Texture" id=47]
+[ext_resource path="res://assets/item_icons/head/thorns.png" type="Texture" id=48]
+[ext_resource path="res://assets/item_icons/head/miners_cap.png" type="Texture" id=49]
+[ext_resource path="res://assets/item_icons/feet/floating.png" type="Texture" id=50]
+[ext_resource path="res://assets/object_icons/Travelrune7.png" type="Texture" id=51]
+[ext_resource path="res://assets/object_icons/Shrine_blood.png" type="Texture" id=52]
+[ext_resource path="res://assets/item_icons/feet/pain.png" type="Texture" id=53]
+[ext_resource path="res://assets/object_icons/Teh_urn.png" type="Texture" id=54]
+[ext_resource path="res://assets/item_icons/head/monocle.png" type="Texture" id=55]
+[ext_resource path="res://assets/item_icons/feet/leaping.png" type="Texture" id=56]
+[ext_resource path="res://assets/item_icons/head/helmet.png" type="Texture" id=57]
+[ext_resource path="res://assets/item_icons/feet/lead.png" type="Texture" id=58]
+[ext_resource path="res://assets/item_icons/feet/hardgreaves.png" type="Texture" id=59]
+[ext_resource path="res://assets/item_icons/head/spiked_ears.png" type="Texture" id=60]
+[ext_resource path="res://assets/object_icons/Shrine_peace.png" type="Texture" id=61]
+[ext_resource path="res://assets/item_icons/feet/strength.png" type="Texture" id=62]
+[ext_resource path="res://assets/item_icons/head/telepathy.png" type="Texture" id=63]
+[ext_resource path="res://assets/object_icons/Trapchest.png" type="Texture" id=64]
+[ext_resource path="res://assets/item_icons/feet/glass.png" type="Texture" id=65]
+[ext_resource path="res://assets/object_icons/Shrine_mimic.png" type="Texture" id=66]
+[ext_resource path="res://assets/item_icons/head/blast_helm.png" type="Texture" id=67]
+[ext_resource path="res://assets/object_icons/Shrine_glass.png" type="Texture" id=68]
+[ext_resource path="res://assets/object_icons/Travelrune2.png" type="Texture" id=69]
+[ext_resource path="res://assets/object_icons/Travelrune5.png" type="Texture" id=70]
+[ext_resource path="res://assets/object_icons/Travelrune4.png" type="Texture" id=71]
+[ext_resource path="res://assets/object_icons/Shrine_risk.png" type="Texture" id=72]
+[ext_resource path="res://assets/object_icons/Shrine_of_Pain.png" type="Texture" id=73]
+[ext_resource path="res://assets/object_icons/Shrine_rhythm.png" type="Texture" id=74]
+[ext_resource path="res://assets/object_icons/Boss_Shrine.png" type="Texture" id=75]
+[ext_resource path="res://assets/object_icons/Travelrune6.png" type="Texture" id=76]
+[ext_resource path="res://assets/item_icons/feet/explorers.png" type="Texture" id=77]
+[ext_resource path="res://assets/item_icons/feet/ballet.png" type="Texture" id=78]
+[ext_resource path="res://assets/object_icons/Shrine_chance.png" type="Texture" id=79]
+[ext_resource path="res://assets/object_icons/Crate.png" type="Texture" id=80]
+[ext_resource path="res://assets/object_icons/Travelrune8.png" type="Texture" id=81]
+[ext_resource path="res://assets/object_icons/Shrine_space.png" type="Texture" id=82]
+[ext_resource path="res://assets/object_icons/Shrine_sacrifice.png" type="Texture" id=83]
+[ext_resource path="res://assets/object_icons/Shrine_war.png" type="Texture" id=84]
+[ext_resource path="res://assets/object_icons/Shrine_of_Uncertainty.png" type="Texture" id=85]
+[ext_resource path="res://assets/object_icons/Shrine_darkness.png" type="Texture" id=86]
+[ext_resource path="res://assets/object_icons/Travelrune3.png" type="Texture" id=87]
+[ext_resource path="res://assets/item_icons/misc/charm_nazar.png" type="Texture" id=88]
+[ext_resource path="res://assets/item_icons/pickup/cursed_potion.png" type="Texture" id=89]
+[ext_resource path="res://assets/item_icons/ring/regen.png" type="Texture" id=90]
+[ext_resource path="res://assets/item_icons/ring/luck.png" type="Texture" id=91]
+[ext_resource path="res://assets/item_icons/misc/map.png" type="Texture" id=92]
+[ext_resource path="res://assets/item_icons/misc/charm_strength.png" type="Texture" id=93]
+[ext_resource path="res://assets/item_icons/ring/courage.png" type="Texture" id=94]
+[ext_resource path="res://assets/item_icons/pickup/familiar_dove.png" type="Texture" id=95]
+[ext_resource path="res://assets/item_icons/ring/protection.png" type="Texture" id=96]
+[ext_resource path="res://assets/item_icons/misc/charm_bomb.png" type="Texture" id=97]
+[ext_resource path="res://assets/item_icons/pickup/familiar_shop.png" type="Texture" id=98]
+[ext_resource path="res://assets/item_icons/ring/piercing.png" type="Texture" id=99]
+[ext_resource path="res://assets/item_icons/misc/charm_risk.png" type="Texture" id=100]
+[ext_resource path="res://assets/item_icons/misc/compass.png" type="Texture" id=101]
+[ext_resource path="res://assets/item_icons/misc/charm_grenade.png" type="Texture" id=102]
+[ext_resource path="res://assets/item_icons/pickup/blood_drum.png" type="Texture" id=103]
+[ext_resource path="res://assets/item_icons/pickup/holy_water.png" type="Texture" id=104]
+[ext_resource path="res://assets/item_icons/misc/charm_gluttony.png" type="Texture" id=105]
+[ext_resource path="res://assets/item_icons/pickup/scroll_need.png" type="Texture" id=106]
+[ext_resource path="res://assets/item_icons/misc/potion.png" type="Texture" id=107]
+[ext_resource path="res://assets/item_icons/misc/monkey_paw.png" type="Texture" id=108]
+[ext_resource path="res://assets/item_icons/misc/charm_frost.png" type="Texture" id=109]
+[ext_resource path="res://assets/item_icons/misc/charm_protection.png" type="Texture" id=110]
+[ext_resource path="res://assets/item_icons/ring/pain.png" type="Texture" id=111]
+[ext_resource path="res://assets/item_icons/ring/frost.png" type="Texture" id=112]
+[ext_resource path="res://assets/item_icons/ring/might.png" type="Texture" id=113]
+[ext_resource path="res://assets/item_icons/pickup/familiar_ice.png" type="Texture" id=114]
+[ext_resource path="res://assets/item_icons/ring/charisma.png" type="Texture" id=115]
+[ext_resource path="res://assets/item_icons/ring/becoming.png" type="Texture" id=116]
+[ext_resource path="res://assets/item_icons/pickup/scroll_earthquake.png" type="Texture" id=117]
+[ext_resource path="res://assets/item_icons/pickup/scroll_enchant.png" type="Texture" id=118]
+[ext_resource path="res://assets/item_icons/pickup/familiar_rat.png" type="Texture" id=119]
+[ext_resource path="res://assets/item_icons/ring/mana.png" type="Texture" id=120]
+[ext_resource path="res://assets/item_icons/ring/gold.png" type="Texture" id=121]
+[ext_resource path="res://assets/item_icons/ring/peace.png" type="Texture" id=122]
+[ext_resource path="res://assets/item_icons/ring/war.png" type="Texture" id=123]
+[ext_resource path="res://assets/item_icons/ring/wonder.png" type="Texture" id=124]
+[ext_resource path="res://assets/item_icons/ring/shadow.png" type="Texture" id=125]
+[ext_resource path="res://assets/item_icons/shovel/strength.png" type="Texture" id=126]
+[ext_resource path="res://assets/item_icons/spell/pulse_spell.png" type="Texture" id=127]
+[ext_resource path="res://assets/item_icons/shovel/battle.png" type="Texture" id=128]
+[ext_resource path="res://assets/item_icons/spell/pulse_tome.png" type="Texture" id=129]
+[ext_resource path="res://assets/item_icons/shovel/glass.png" type="Texture" id=130]
+[ext_resource path="res://assets/item_icons/shovel/crystal.png" type="Texture" id=131]
+[ext_resource path="res://assets/item_icons/spell/transmute_spell.png" type="Texture" id=132]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -115,10 +202,18 @@ size = 36
 font_data = ExtResource( 6 )
 
 [sub_resource type="DynamicFont" id=14]
-size = 24
+size = 48
 font_data = ExtResource( 6 )
 
 [sub_resource type="DynamicFont" id=15]
+size = 24
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=16]
+size = 36
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=17]
 size = 24
 font_data = ExtResource( 6 )
 
@@ -142,7 +237,7 @@ __meta__ = {
 position = Vector2( 139.444, 200.265 )
 scale = Vector2( 4, 4 )
 frames = SubResource( 1 )
-frame = 1
+frame = 2
 speed_scale = 2.0
 playing = true
 
@@ -329,23 +424,24 @@ anchor_left = 0.15
 anchor_top = 0.05
 anchor_right = 0.85
 anchor_bottom = 0.4
-margin_left = 0.5
+margin_left = 0.499992
 margin_top = -0.139999
 margin_right = 0.249939
-margin_bottom = 4.33997
 custom_fonts/font = SubResource( 14 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="item" type="ItemList" parent="Control2/build_maker"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
-margin_top = 39.0
+margin_top = 58.0
 margin_right = -4.0
 margin_bottom = -4.0
-items = [ "", ExtResource( 31 ), false, "", ExtResource( 32 ), false, "", ExtResource( 35 ), false, "", ExtResource( 33 ), false, "", ExtResource( 34 ), false, "", ExtResource( 44 ), false, "", ExtResource( 43 ), false, "", ExtResource( 40 ), false, "", ExtResource( 42 ), false, "", ExtResource( 38 ), false, "", ExtResource( 37 ), false, "", ExtResource( 41 ), false, "", ExtResource( 39 ), false, "", ExtResource( 36 ), false, "", ExtResource( 45 ), false ]
+items = [ "항목 0개", ExtResource( 36 ), false, "항목 1개", ExtResource( 40 ), false, "항목 2개", ExtResource( 38 ), false, "항목 3개", ExtResource( 35 ), false, "항목 4개", ExtResource( 34 ), false, "항목 5개", ExtResource( 33 ), false, "항목 6개", ExtResource( 32 ), false, "항목 7개", ExtResource( 39 ), false, "항목 8개", ExtResource( 37 ), false, "항목 9개", ExtResource( 78 ), false, "항목 10개", ExtResource( 77 ), false, "항목 11개", ExtResource( 58 ), false, "항목 12개", ExtResource( 56 ), false, "항목 13개", ExtResource( 47 ), false, "항목 14개", ExtResource( 53 ), false, "항목 15개", ExtResource( 62 ), false, "항목 16개", ExtResource( 50 ), false, "항목 17개", ExtResource( 65 ), false, "항목 18개", ExtResource( 59 ), false, "항목 19개", ExtResource( 67 ), false, "항목 20개", ExtResource( 63 ), false, "항목 21개", ExtResource( 48 ), false, "항목 22개", ExtResource( 43 ), false, "항목 23개", ExtResource( 57 ), false, "항목 24개", ExtResource( 49 ), false, "항목 25개", ExtResource( 55 ), false, "항목 26개", ExtResource( 60 ), false, "항목 27개", ExtResource( 41 ), false, "항목 28개", ExtResource( 102 ), false, "항목 29개", ExtResource( 97 ), false, "항목 30개", ExtResource( 109 ), false, "항목 31개", ExtResource( 105 ), false, "항목 32개", ExtResource( 88 ), false, "항목 33개", ExtResource( 110 ), false, "항목 34개", ExtResource( 100 ), false, "항목 35개", ExtResource( 93 ), false, "항목 36개", ExtResource( 108 ), false, "항목 37개", ExtResource( 101 ), false, "항목 38개", ExtResource( 92 ), false, "항목 39개", ExtResource( 107 ), false, "항목 40개", ExtResource( 103 ), false, "항목 41개", ExtResource( 89 ), false, "항목 42개", ExtResource( 104 ), false, "항목 43개", ExtResource( 117 ), false, "항목 44개", ExtResource( 106 ), false, "항목 45개", ExtResource( 118 ), false, "항목 46개", ExtResource( 95 ), false, "항목 47개", ExtResource( 114 ), false, "항목 48개", ExtResource( 119 ), false, "항목 49개", ExtResource( 98 ), false, "항목 50개", ExtResource( 116 ), false, "항목 51개", ExtResource( 115 ), false, "항목 52개", ExtResource( 94 ), false, "항목 53개", ExtResource( 90 ), false, "항목 54개", ExtResource( 112 ), false, "항목 55개", ExtResource( 121 ), false, "항목 56개", ExtResource( 91 ), false, "항목 57개", ExtResource( 120 ), false, "항목 58개", ExtResource( 113 ), false, "항목 59개", ExtResource( 111 ), false, "항목 60개", ExtResource( 122 ), false, "항목 61개", ExtResource( 99 ), false, "항목 62개", ExtResource( 96 ), false, "항목 63개", ExtResource( 125 ), false, "항목 64개", ExtResource( 123 ), false, "항목 65개", ExtResource( 124 ), false, "항목 66개", ExtResource( 128 ), false, "항목 67개", ExtResource( 7 ), false, "항목 68개", ExtResource( 31 ), false, "항목 69개", ExtResource( 130 ), false, "항목 70개", ExtResource( 131 ), false, "항목 71개", ExtResource( 126 ), false, "항목 72개", ExtResource( 127 ), false, "항목 73개", ExtResource( 129 ), false, "항목 74개", null, false, "항목 75개", null, false, "항목 76개", null, false, "항목 77개", null, false, "항목 78개", null, false, "항목 79개", null, false, "항목 80개", null, false, "항목 81개", null, false, "항목 82개", null, false, "항목 83개", null, false, "항목 84개", null, false ]
+allow_reselect = true
 max_columns = 10
 same_column_width = true
 script = ExtResource( 8 )
@@ -358,11 +454,11 @@ visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
-margin_top = 39.0
+margin_top = 58.0
 margin_right = -4.0
 margin_bottom = -4.0
 custom_fonts/font = SubResource( 10 )
-items = [ "1-1", ExtResource( 23 ), false, "1-2", ExtResource( 28 ), false, "1-3", ExtResource( 10 ), false, "1-4", ExtResource( 27 ), false, "2-1", ExtResource( 22 ), false, "2-2", ExtResource( 25 ), false, "2-3", ExtResource( 10 ), false, "2-4", ExtResource( 27 ), false, "3-1", ExtResource( 26 ), false, "3-2", ExtResource( 19 ), false, "3-3", ExtResource( 10 ), false, "3-4", ExtResource( 27 ), false, "4-1", ExtResource( 16 ), false, "4-2", ExtResource( 14 ), false, "4-3", ExtResource( 17 ), false, "4-4", ExtResource( 27 ), false, "5-1", ExtResource( 11 ), false, "5-2", ExtResource( 24 ), false, "5-3", ExtResource( 20 ), false, "5-4", ExtResource( 27 ), false ]
+items = [ "1-1", ExtResource( 23 ), false, "1-2", ExtResource( 28 ), false, "1-3", ExtResource( 10 ), false, "1-4", ExtResource( 27 ), false, "2-1", ExtResource( 22 ), false, "2-2", ExtResource( 25 ), false, "2-3", ExtResource( 10 ), false, "2-4", ExtResource( 27 ), false, "3-1", ExtResource( 26 ), false, "3-2", ExtResource( 19 ), false, "3-3", ExtResource( 10 ), false, "3-4", ExtResource( 27 ), false, "4-1", ExtResource( 16 ), false, "4-2", ExtResource( 14 ), false, "4-3", ExtResource( 17 ), false, "4-4", ExtResource( 27 ), false, "5-1", ExtResource( 11 ), false, "5-2", ExtResource( 24 ), false, "5-3", ExtResource( 20 ), false, "5-4", ExtResource( 27 ), false, "1-x", ExtResource( 23 ), false, "2-x", ExtResource( 22 ), false, "3-x", ExtResource( 26 ), false, "4-x", ExtResource( 16 ), false, "5-x", ExtResource( 11 ), false ]
 max_columns = 4
 same_column_width = true
 __meta__ = {
@@ -370,13 +466,15 @@ __meta__ = {
 }
 
 [node name="how" type="ItemList" parent="Control2/build_maker"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
-margin_top = 39.0
+margin_top = 58.0
 margin_right = -4.0
 margin_bottom = -4.0
+items = [ "", ExtResource( 44 ), false, "", ExtResource( 66 ), false, "", ExtResource( 64 ), false, "", ExtResource( 54 ), false, "", ExtResource( 45 ), false, "", ExtResource( 80 ), false, "", ExtResource( 69 ), false, "", ExtResource( 87 ), false, "", ExtResource( 71 ), false, "", ExtResource( 70 ), false, "", ExtResource( 76 ), false, "", ExtResource( 51 ), false, "", ExtResource( 81 ), false, "", ExtResource( 46 ), false, "", ExtResource( 75 ), false, "", ExtResource( 52 ), false, "", ExtResource( 79 ), false, "", ExtResource( 86 ), false, "", ExtResource( 68 ), false, "", ExtResource( 73 ), false, "", ExtResource( 85 ), false, "", ExtResource( 61 ), false, "", ExtResource( 74 ), false, "", ExtResource( 72 ), false, "", ExtResource( 83 ), false, "", ExtResource( 82 ), false, "", ExtResource( 84 ), false, "", ExtResource( 42 ), false, "항목 28개", ExtResource( 132 ), false ]
+max_columns = 4
+script = ExtResource( 8 )
 
 [node name="view_item" type="TextureRect" parent="Control2"]
 anchor_left = 0.1
@@ -403,7 +501,7 @@ __meta__ = {
 }
 
 [node name="view_floor_label" type="Label" parent="Control2/view_floor"]
-anchor_left = 1.0
+anchor_left = 0.6
 anchor_right = 1.5
 anchor_bottom = 1.0
 custom_fonts/font = SubResource( 15 )
@@ -418,7 +516,7 @@ anchor_left = 0.7
 anchor_top = 0.45
 anchor_right = 0.9
 anchor_bottom = 0.55
-texture = ExtResource( 7 )
+texture = ExtResource( 44 )
 expand = true
 stretch_mode = 5
 __meta__ = {
@@ -441,8 +539,46 @@ anchor_left = 0.6
 anchor_top = 0.9
 anchor_right = 0.85
 anchor_bottom = 0.95
+margin_left = -3.05176e-05
 custom_fonts/font = SubResource( 12 )
 text = "post"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="add_to_build" type="Button" parent="Control2"]
+anchor_left = 0.1
+anchor_top = 0.6
+anchor_right = 0.45
+anchor_bottom = 0.65
+custom_fonts/font = SubResource( 16 )
+text = "add to build"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="added_build_label" type="Label" parent="Control2/add_to_build"]
+anchor_top = 1.2
+anchor_right = 2.5
+anchor_bottom = 5.5
+margin_left = 0.0982533
+margin_top = -0.0233459
+margin_right = 0.029541
+margin_bottom = 0.0196838
+custom_fonts/font = SubResource( 17 )
+text = "item in where from how"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="delete_build" type="Button" parent="Control2"]
+anchor_left = 0.55
+anchor_top = 0.6
+anchor_right = 0.9
+anchor_bottom = 0.65
+custom_fonts/font = SubResource( 16 )
+text = "delete build"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -461,3 +597,5 @@ __meta__ = {
 [connection signal="item_selected" from="Control2/build_maker/how" to="." method="_on_how_item_selected"]
 [connection signal="pressed" from="Control2/prev_page" to="." method="_on_prev_page_pressed"]
 [connection signal="pressed" from="Control2/post" to="." method="_on_post_pressed"]
+[connection signal="pressed" from="Control2/add_to_build" to="." method="_on_add_to_build_pressed"]
+[connection signal="pressed" from="Control2/delete_build" to="." method="_on_delete_build_pressed"]

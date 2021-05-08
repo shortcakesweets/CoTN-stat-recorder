@@ -9,8 +9,8 @@ var player_name : String
 
 var Character
 var Mod
-var igt
-var rta
+var igt : float
+var rta : float
 var random_seed : int
 var death : String
 var isWin : bool

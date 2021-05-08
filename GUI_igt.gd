@@ -22,8 +22,6 @@ func _set_igt_to_rta( time : float ) :
 	GUI_minute.text = str(minute)
 
 func check_valid_text(target_text) -> bool:
-	# Debug
-	#print(" original : " + target_text)
 	# return false when target_text is invalid
 	return true
 
@@ -39,17 +37,18 @@ func calculate_time_with_text() -> float :
 		second = int(GUI_second.text)
 		minute = int(GUI_minute.text)
 		
-		time = ms/1000 + second + minute*60
-	
-	# calculate time with them
-	# time = ms + second * 100 + minute * 6000
+		time = fmod(ms/1000, 1) + float(second) + float(minute*60)
+		#print(" calculated time on igt : " + str(time))
 	
 	return time
 
 func _text_entered(new_text):
+	#Debug
+	print("Text entered")
+	
 	if not check_valid_text(new_text) :
 		return
 	
-	var time : int = calculate_time_with_text()
+	var time : float = calculate_time_with_text()
 	
 	emit_signal("give_igt", time)
