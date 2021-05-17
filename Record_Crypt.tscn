@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://necrosans/necrosans.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Five_Second_Timer.tscn" type="PackedScene" id=2]
@@ -7,6 +7,9 @@
 [ext_resource path="res://assets/Cadence/cadence_3.png" type="Texture" id=5]
 [ext_resource path="res://assets/Cadence/cadence_1.png" type="Texture" id=6]
 [ext_resource path="res://Record_Crypt.gd" type="Script" id=7]
+[ext_resource path="res://necrosans/font_large.tres" type="DynamicFont" id=8]
+[ext_resource path="res://necrosans/font_small.tres" type="DynamicFont" id=9]
+[ext_resource path="res://necrosans/font_maximum.tres" type="DynamicFont" id=10]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -21,13 +24,11 @@ size = 60
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=3]
-size = 48
-outline_size = 1
-outline_color = Color( 0, 0.0156863, 1, 1 )
+size = 36
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=4]
-size = 24
+size = 48
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=5]
@@ -35,22 +36,6 @@ size = 24
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=6]
-size = 76
-font_data = ExtResource( 1 )
-
-[sub_resource type="DynamicFont" id=7]
-size = 36
-font_data = ExtResource( 1 )
-
-[sub_resource type="DynamicFont" id=8]
-size = 48
-font_data = ExtResource( 1 )
-
-[sub_resource type="DynamicFont" id=9]
-size = 24
-font_data = ExtResource( 1 )
-
-[sub_resource type="DynamicFont" id=10]
 size = 24
 font_data = ExtResource( 1 )
 
@@ -98,12 +83,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label_Seed" type="Label" parent="Control"]
+[node name="Label_Seed" type="Label" parent="Control" groups=[
+"font_large",
+]]
 anchor_left = 0.3
 anchor_top = 0.05
 anchor_right = 0.9
 anchor_bottom = 0.15
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = ExtResource( 8 )
 text = "Seeded run
 123456"
 align = 1
@@ -112,33 +99,39 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="random_seed" type="Button" parent="Control/Label_Seed"]
+[node name="random_seed" type="Button" parent="Control/Label_Seed" groups=[
+"font_small",
+]]
 anchor_top = 1.2
 anchor_right = 0.45
 anchor_bottom = 1.6
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = ExtResource( 9 )
 text = "random seed"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="enter_seed" type="Button" parent="Control/Label_Seed"]
+[node name="enter_seed" type="Button" parent="Control/Label_Seed" groups=[
+"font_small",
+]]
 anchor_left = 0.55
 anchor_top = 1.2
 anchor_right = 1.0
 anchor_bottom = 1.6
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = ExtResource( 9 )
 disabled = true
 text = "enter seed"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label_Timer" type="Label" parent="Control"]
+[node name="Label_Timer" type="Label" parent="Control" groups=[
+"font_maximum",
+]]
 anchor_top = 0.3
 anchor_right = 1.0
 anchor_bottom = 0.45
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = ExtResource( 10 )
 text = "00:00.000"
 align = 1
 valign = 1
@@ -146,36 +139,42 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button_Post" type="Button" parent="Control/Label_Timer"]
+[node name="Button_Post" type="Button" parent="Control/Label_Timer" groups=[
+"font_medium",
+]]
 anchor_left = 0.05
 anchor_top = 1.2
 anchor_right = 0.45
 anchor_bottom = 1.6
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 3 )
 disabled = true
 text = "Post Result"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button_Discard" type="Button" parent="Control/Label_Timer"]
+[node name="Button_Discard" type="Button" parent="Control/Label_Timer" groups=[
+"font_medium",
+]]
 anchor_left = 0.55
 anchor_top = 1.2
 anchor_right = 0.95
 anchor_bottom = 1.6
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 3 )
 disabled = true
 text = "Discard Result"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="start_timer" type="Button" parent="Control/Label_Timer"]
+[node name="start_timer" type="Button" parent="Control/Label_Timer" groups=[
+"font_large",
+]]
 anchor_left = 0.3
 anchor_top = 1.8
 anchor_right = 0.7
 anchor_bottom = 2.2
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 4 )
 text = "Start run"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -190,7 +189,7 @@ margin_left = -1.00002
 margin_top = 1.79999
 margin_right = -1.0
 margin_bottom = 1.79999
-custom_fonts/font = SubResource( 9 )
+custom_fonts/font = SubResource( 5 )
 text = "Timer : 5 second"
 align = 1
 valign = 1
@@ -198,12 +197,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button_Return" type="Button" parent="Control"]
+[node name="Button_Return" type="Button" parent="Control" groups=[
+"font_small",
+]]
 anchor_left = 0.8
 anchor_top = 0.03
 anchor_right = 0.95
 anchor_bottom = 0.07
-custom_fonts/font = SubResource( 10 )
+custom_fonts/font = SubResource( 6 )
 text = "return"
 __meta__ = {
 "_edit_use_anchors_": false

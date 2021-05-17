@@ -3,17 +3,26 @@ extends Node2D
 enum {LEFT, RIGHT}
 onready var camera = get_node("Camera2D")
 
+onready var font_maximum : DynamicFont = load("res://necrosans/font_maximum.tres")
+onready var font_large : DynamicFont = load("res://necrosans/font_large.tres")
+onready var font_medium : DynamicFont = load("res://necrosans/font_medium.tres")
+onready var font_small : DynamicFont = load("res://necrosans/font_small.tres")
+# onready var font_minimum : DynamicFont = load("res://necrosans/font_minimum.tres")
+
+onready var animated_sprite = get_node("Control/AnimatedSprite")
+
 var crypt_raw : Crypt
 
 func _ready():
 	crypt_raw = LocalCryptSave.get_latest_crypt_from_array()
 	sync_screen_size()
+	sync_text_size()
 	_clear_run()
 	print_build_in_sentence()
 	
 	set_GUI_from_data(crypt_raw)
-	
 
+# Here, sync_screen_size() also takes part of resizing icons.
 func sync_screen_size():
 	var width = get_viewport().size.x
 	var height = get_viewport().size.y
@@ -23,6 +32,75 @@ func sync_screen_size():
 	right_control.margin_left = width
 	right_control.margin_right = width * 2
 	right_control.margin_bottom = height
+	
+	animated_sprite.position = Vector2( width, height ) * 0.15
+	animated_sprite.scale = Vector2(1,1) * float(width / 240.0)
+	
+	# Icon scales
+	var custom_scale : float = float(width / 750.0) * 1.0
+	
+	GUI_death.icon_scale = custom_scale
+	
+	GUI_build_item.icon_scale = custom_scale
+	GUI_build_floor.icon_scale = custom_scale
+	GUI_build_how.icon_scale = custom_scale
+
+func sync_text_size() -> void:
+	# Text size varies by resolution
+	#   minimum : x1 (don't use this size)
+	#   small : x2
+	#   medium : x3
+	#   big : x4
+	#   maximum : x6
+	#
+	# on 750 * 1330 androids, we use x1 as 12 pixels.
+	#  (small : 24px, maximum : 76px)
+	
+	var text_size : int
+	
+	var width = get_viewport().size.x
+	# var height = get_viewport().size.y
+	
+	if width >= 700 :
+		text_size = 12
+		
+		if width >= 1400 :
+			text_size = 18
+			
+			if width >= 1600 :
+				text_size = 24
+	
+	font_maximum.size = text_size * 6
+	font_large.size = text_size * 4
+	font_medium.size = text_size * 3
+	font_small.size = text_size * 2
+	# font_minimum.size = text_size * 1
+	
+	var GROUP_font_maximum = get_tree().get_nodes_in_group("font_maximum")
+	var GROUP_font_large = get_tree().get_nodes_in_group("font_large")
+	var GROUP_font_medium = get_tree().get_nodes_in_group("font_medium")
+	var GROUP_font_small = get_tree().get_nodes_in_group("font_small")
+	# var GROUP_font_minimum = get_tree().get_nodes_in_group("font_minimum")
+	
+	for target_node in GROUP_font_maximum :
+		if "custom_fonts/font" in target_node :
+			target_node.set("custom_fonts/font", font_maximum)
+	
+	for target_node in GROUP_font_large :
+		if "custom_fonts/font" in target_node :
+			target_node.set("custom_fonts/font", font_large)
+	
+	for target_node in GROUP_font_medium :
+		if "custom_fonts/font" in target_node :
+			target_node.set("custom_fonts/font", font_medium)
+	
+	for target_node in GROUP_font_small :
+		if "custom_fonts/font" in target_node :
+			target_node.set("custom_fonts/font", font_small)
+	
+	# Skip minimum nodes.
+	
+	return
 
 func _clear_run() -> void:
 	button_normal.pressed = true
@@ -138,6 +216,9 @@ onready var Button_prev_page = get_node("Control2/prev_page")
 onready var Button_add_build = get_node("Control2/add_to_build")
 onready var Button_delete_build = get_node("Control2/delete_build")
 
+# Web connection error message handling
+onready var web_connection_error_label = get_node("Control2/post/web_error_label")
+
 var build_raw : Crypt.Build = Crypt.Build.new()
 
 var processing_post : bool = false
@@ -185,14 +266,22 @@ func _on_post_pressed():
 	
 	var body = {"nick": crypt_raw.player_name, "character": crypt_raw.Character, "mode": crypt_raw.Mod, "igt":crypt_raw.igt, "rta":crypt_raw.rta, "random_seed":crypt_raw.random_seed, "death":crypt_raw.death, "isWin":crypt_raw.isWin, "build":parse_build(crypt_raw.build)}
 	var error = http_request.request("http://3.35.91.222:4500/api/data", ["Content-Type: application/json"], true, HTTPClient.METHOD_POST, to_json(body))
+	
+	# var error = http_request.request("http://3.35.91.222:4500/api/data")
 	if error != OK:
 		push_error("An error occurred in the HTTP request.")
 	
 	_button_control(false)
 	
+	if typeof(error) == TYPE_STRING :
+		web_connection_error_label.text = error
+	else :
+		web_connection_error_label.text = str(error)
+	
 	# If you don't want to return to menu, make this line commentary:
 	if error == OK :
-		_on_return_pressed()
+		#_on_return_pressed()
+		pass
 
 func cook_crypt_from_GUI() -> void:
 	# Mod, igt, rta, random_seed, death, build are already cooked automatically

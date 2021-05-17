@@ -200,7 +200,7 @@ var how_list : Dictionary = {
 }
 
 func _ready():
-	pass
+	vscroll = self.get_v_scroll()
 
 func item_find_text_by_index(index : int) -> String:
 	for sub_text in item_list :
@@ -222,3 +222,35 @@ func how_find_text_by_index(index : int) -> String:
 			return how_text
 	
 	return "null"
+
+##############################################################
+
+# Function implementation for scrolling via touchscreen
+
+var vscroll : VScrollBar
+var swipe_sensitivity = 1
+
+var swipe : bool = false
+var swipePoint_init = 0
+var swipePoint = 0
+
+var value_init = 0
+
+func _gui_input(event):
+	
+	if (event is InputEventMouseButton) and (event.pressed == true) :
+		#print("click")
+		
+		swipe = true
+		swipePoint_init = event.position.y
+		value_init = vscroll.value
+	
+	if (event is InputEventMouseButton) and (event.pressed == false) :
+		swipe = false
+		value_init = 0
+		
+		pass
+	
+	if swipe and (event is InputEventMouseMotion) :
+		swipePoint = event.position.y
+		vscroll.value = value_init - swipe_sensitivity * vscroll.max_value * (swipePoint - swipePoint_init) / self.rect_size.y
