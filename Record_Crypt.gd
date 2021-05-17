@@ -25,6 +25,7 @@ onready var control = get_node("Control")
 
 onready var five_second_timer = get_node("Five_Second_Timer")
 
+onready var label_current_user = get_node("Control/User")
 
 var time : float = 0
 var isTimerOn : bool = false
@@ -51,19 +52,10 @@ func sync_text_size() -> void:
 	# on 750 * 1330 androids, we use x1 as 12 pixels.
 	#  (small : 24px, maximum : 76px)
 	
-	var text_size : int
+	var text_size = LocalCryptSave.font_size
 	
-	var width = get_viewport().size.x
+	#var width = get_viewport().size.x
 	# var height = get_viewport().size.y
-	
-	if width >= 700 :
-		text_size = 12
-		
-		if width >= 1400 :
-			text_size = 18
-			
-			if width >= 1600 :
-				text_size = 24
 	
 	font_maximum.size = text_size * 6
 	font_large.size = text_size * 4
@@ -108,6 +100,8 @@ func _ready():
 	
 	#button_post.disabled = !isTimerOn
 	#button_discard.disabled = !isTimerOn
+	
+	label_current_user.text = "current user : " + LocalCryptSave.username
 
 func get_data_from_GUI() -> void :
 	# get character data from GUI

@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://necrosans/necrosans.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Settings.gd" type="Script" id=2]
 [ext_resource path="res://necrosans/font_medium.tres" type="DynamicFont" id=3]
+[ext_resource path="res://necrosans/font_large.tres" type="DynamicFont" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
@@ -10,6 +11,14 @@ font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=2]
 size = 24
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 36
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 48
 font_data = ExtResource( 1 )
 
 [node name="Settings" type="Node2D"]
@@ -25,37 +34,14 @@ __meta__ = {
 [node name="return_button" type="Button" parent="Control" groups=[
 "font_medium",
 ]]
-anchor_left = 0.7
+anchor_left = 0.6
 anchor_top = 0.05
-anchor_right = 0.9
-anchor_bottom = 0.15
+anchor_right = 0.95
+anchor_bottom = 0.1
+margin_left = -0.0454407
+margin_bottom = -0.540192
 custom_fonts/font = SubResource( 1 )
-text = "return"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="CheckButton" type="CheckButton" parent="Control"]
-anchor_left = 0.5
-anchor_top = 0.2
-anchor_right = 0.6
-anchor_bottom = 0.25
-align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="Control/CheckButton" groups=[
-"font_small",
-]]
-anchor_left = -4.197
-anchor_bottom = 0.932
-margin_left = -0.0279846
-margin_bottom = 0.0219955
-custom_fonts/font = SubResource( 2 )
-text = "run division function"
-align = 1
-valign = 1
+text = "save and return"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -63,10 +49,10 @@ __meta__ = {
 [node name="Debug_label_font_size" type="Label" parent="Control" groups=[
 "font_medium",
 ]]
-anchor_left = 0.064
-anchor_top = 0.315
-anchor_right = 0.883
-anchor_bottom = 0.409
+anchor_left = 0.1
+anchor_top = 0.35
+anchor_right = 0.9
+anchor_bottom = 0.45
 custom_fonts/font = ExtResource( 3 )
 text = "current font size is set to
  (minimum) n"
@@ -78,5 +64,76 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="username" type="LineEdit" parent="Control"]
+anchor_left = 0.1
+anchor_top = 0.6
+anchor_right = 0.9
+anchor_bottom = 0.7
+margin_left = -0.250008
+margin_top = -0.600037
+margin_bottom = 0.649963
+custom_fonts/font = ExtResource( 4 )
+text = "Anonymous"
+align = 1
+max_length = 16
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="label_username" type="Label" parent="Control/username"]
+anchor_left = 0.338
+anchor_top = -0.713
+anchor_right = 0.655
+margin_left = 0.0379791
+margin_top = 0.0130081
+margin_right = 0.154968
+margin_bottom = -8.0
+custom_fonts/font = ExtResource( 3 )
+text = "username "
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="fontsize_small" type="Button" parent="Control"]
+anchor_left = 0.1
+anchor_top = 0.25
+anchor_right = 0.3
+anchor_bottom = 0.3
+margin_left = 0.246521
+margin_top = -0.512085
+margin_right = -0.003479
+margin_bottom = -0.662079
+custom_fonts/font = SubResource( 2 )
+text = "small"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="fontsize_medium" type="Button" parent="Control"]
+anchor_left = 0.35
+anchor_top = 0.25
+anchor_right = 0.6
+anchor_bottom = 0.3
+custom_fonts/font = SubResource( 3 )
+text = "medium"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="fontsize_large" type="Button" parent="Control"]
+anchor_left = 0.65
+anchor_top = 0.25
+anchor_right = 0.9
+anchor_bottom = 0.3
+custom_fonts/font = SubResource( 4 )
+text = "large"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [connection signal="pressed" from="Control/return_button" to="." method="_on_return_button_pressed"]
-[connection signal="toggled" from="Control/CheckButton" to="." method="_on_CheckButton_toggled"]
+[connection signal="pressed" from="Control/fontsize_small" to="." method="_on_fontsize_button_pressed" binds= [ 12 ]]
+[connection signal="pressed" from="Control/fontsize_medium" to="." method="_on_fontsize_button_pressed" binds= [ 18 ]]
+[connection signal="pressed" from="Control/fontsize_large" to="." method="_on_fontsize_button_pressed" binds= [ 24 ]]

@@ -11,6 +11,8 @@ onready var font_small : DynamicFont = load("res://necrosans/font_small.tres")
 
 onready var animated_sprite = get_node("Control/AnimatedSprite")
 
+onready var label_current_user = get_node("Control2/User")
+
 var crypt_raw : Crypt
 
 func _ready():
@@ -21,6 +23,8 @@ func _ready():
 	print_build_in_sentence()
 	
 	set_GUI_from_data(crypt_raw)
+	
+	label_current_user.text = "current user : " + LocalCryptSave.username
 
 # Here, sync_screen_size() also takes part of resizing icons.
 func sync_screen_size():
@@ -56,19 +60,10 @@ func sync_text_size() -> void:
 	# on 750 * 1330 androids, we use x1 as 12 pixels.
 	#  (small : 24px, maximum : 76px)
 	
-	var text_size : int
+	var text_size = LocalCryptSave.font_size
 	
-	var width = get_viewport().size.x
+	#var width = get_viewport().size.x
 	# var height = get_viewport().size.y
-	
-	if width >= 700 :
-		text_size = 12
-		
-		if width >= 1400 :
-			text_size = 18
-			
-			if width >= 1600 :
-				text_size = 24
 	
 	font_maximum.size = text_size * 6
 	font_large.size = text_size * 4
@@ -289,9 +284,13 @@ func cook_crypt_from_GUI() -> void:
 	
 	# need to cook player_name(nick), igt
 	
+	########## cook nickname ########
+	crypt_raw.player_name = LocalCryptSave.username
+	#################################
+	
 	########## cook igt #############
 	# force igt to think text is entered again
-	#GUI_igt._text_entered()
+	crypt_raw.igt = GUI_igt.calculate_time_with_text()
 	#################################
 	
 	########## cook isWin ###########

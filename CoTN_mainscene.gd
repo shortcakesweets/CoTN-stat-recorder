@@ -10,6 +10,8 @@ onready var font_small : DynamicFont = load("res://necrosans/font_small.tres")
 
 onready var animated_sprite = get_node("Control/AnimatedSprite")
 
+onready var label_current_user = get_node("Control/User")
+
 func _ready():
 	# sync_screen_size() will be used every node, and will have it's 
 	# own unique methods per node. contains resizing character animation.
@@ -19,6 +21,8 @@ func _ready():
 	# I know it is least optimized I know; but its a simple app we don't
 	#need performance optimizations
 	sync_text_size()
+	
+	label_current_user.text = "current user : " + LocalCryptSave.username
 
 func sync_screen_size():
 	var width = get_viewport().size.x
@@ -40,19 +44,10 @@ func sync_text_size() -> void:
 	# on 750 * 1330 androids, we use x1 as 12 pixels.
 	#  (small : 24px, maximum : 76px)
 	
-	var text_size : int
+	var text_size = LocalCryptSave.font_size
 	
-	var width = get_viewport().size.x
+	#var width = get_viewport().size.x
 	# var height = get_viewport().size.y
-	
-	if width >= 700 :
-		text_size = 12
-		
-		if width >= 1400 :
-			text_size = 18
-			
-			if width >= 1600 :
-				text_size = 24
 	
 	font_maximum.size = text_size * 6
 	font_large.size = text_size * 4
@@ -85,7 +80,6 @@ func sync_text_size() -> void:
 	# Skip minimum nodes.
 	
 	return
-
 
 func _on_settings_pressed():
 	get_tree().change_scene("res://Settings.tscn")

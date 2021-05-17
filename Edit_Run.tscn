@@ -1,4 +1,4 @@
-[gd_scene load_steps=151 format=2]
+[gd_scene load_steps=152 format=2]
 
 [ext_resource path="res://Edit_Run.gd" type="Script" id=1]
 [ext_resource path="res://assets/Cadence/cadence_2.png" type="Texture" id=2]
@@ -132,6 +132,7 @@
 [ext_resource path="res://assets/item_icons/shovel/glass.png" type="Texture" id=130]
 [ext_resource path="res://assets/item_icons/shovel/crystal.png" type="Texture" id=131]
 [ext_resource path="res://assets/item_icons/spell/transmute_spell.png" type="Texture" id=132]
+[ext_resource path="res://necrosans/font_medium.tres" type="DynamicFont" id=133]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -632,6 +633,20 @@ anchor_right = 0.9
 anchor_bottom = 0.65
 custom_fonts/font = SubResource( 17 )
 text = "delete build"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="User" type="Label" parent="Control2" groups=[
+"font_medium",
+]]
+anchor_top = 0.95
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 133 )
+text = "current user : Anonymous"
+align = 1
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
