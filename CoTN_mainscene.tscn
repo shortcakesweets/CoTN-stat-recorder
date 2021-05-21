@@ -47,7 +47,6 @@ anchor_top = 0.5
 anchor_right = 0.9
 anchor_bottom = 0.6
 custom_fonts/font = ExtResource( 5 )
-disabled = true
 text = "view stats"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -98,7 +97,7 @@ __meta__ = {
 position = Vector2( 176, 216 )
 scale = Vector2( 6, 6 )
 frames = SubResource( 1 )
-frame = 1
+frame = 2
 speed_scale = 2.0
 playing = true
 
@@ -147,4 +146,5 @@ __meta__ = {
 }
 
 [connection signal="pressed" from="Control/run_random_seed" to="." method="_on_run_random_seed_pressed"]
+[connection signal="pressed" from="Control/view_stats" to="." method="_on_view_stats_pressed"]
 [connection signal="pressed" from="Control/settings" to="." method="_on_settings_pressed"]

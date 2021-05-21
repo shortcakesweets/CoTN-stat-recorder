@@ -86,3 +86,6 @@ func _on_settings_pressed():
 
 func _on_run_random_seed_pressed():
 	get_tree().change_scene("res://Record_Crypt.tscn")
+
+func _on_view_stats_pressed():
+	get_tree().change_scene("res://Stats.tscn")
