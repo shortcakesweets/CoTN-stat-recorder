@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://necrosans/necrosans.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/Cadence/cadence_0.png" type="Texture" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://necrosans/font_medium.tres" type="DynamicFont" id=7]
 [ext_resource path="res://necrosans/font_large.tres" type="DynamicFont" id=8]
 [ext_resource path="res://ND_item_list.gd" type="Script" id=9]
+[ext_resource path="res://Crypt_block.tscn" type="PackedScene" id=10]
 
 [sub_resource type="DynamicFont" id=1]
 size = 36
@@ -35,6 +36,8 @@ frame_3/delay_sec = 0.0
 
 [node name="Stats" type="Node2D"]
 script = ExtResource( 5 )
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
@@ -215,6 +218,28 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="simple_stats" type="Label" parent="Control" groups=[
+"font_medium",
+]]
+anchor_left = 0.1
+anchor_top = 0.7
+anchor_right = 0.9
+anchor_bottom = 0.95
+custom_fonts/font = ExtResource( 7 )
+text = "total runs (clears) : 100 (80)
+
+clear rate : 80.0%
+
+average rta : 10:00.00
+std : 00:00.00
+
+average igt : 09:00.00
+std : 00:00.00"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Control2" type="Control" parent="."]
 margin_left = 750.0
 margin_right = 1500.0
@@ -222,6 +247,60 @@ margin_bottom = 1330.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="search_option_label" type="Label" parent="Control2" groups=[
+"font_medium",
+]]
+anchor_left = 0.062
+anchor_top = 0.106
+anchor_right = 0.259
+anchor_bottom = 0.212
+margin_left = 0.499996
+margin_top = 0.019989
+margin_right = -0.25
+margin_bottom = 0.039978
+custom_fonts/font = ExtResource( 7 )
+text = "search
+options"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="search_option_label2" type="Label" parent="Control2" groups=[
+"font_medium",
+]]
+anchor_left = 0.309
+anchor_top = 0.12
+anchor_right = 1.0
+anchor_bottom = 0.201
+margin_left = -5.75002
+margin_top = 0.399994
+margin_right = -14.0
+margin_bottom = 5.66998
+custom_fonts/font = ExtResource( 7 )
+text = "player : Anonymous
+character : cadence
+mod : normal"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="crypt_list" type="Control" parent="Control2"]
+anchor_left = 0.05
+anchor_top = 0.25
+anchor_right = 0.95
+anchor_bottom = 0.8
+
+[node name="Crypt_block" parent="Control2/crypt_list" instance=ExtResource( 10 )]
+
+[node name="Crypt_block2" parent="Control2/crypt_list" instance=ExtResource( 10 )]
+BLOCK_NUM = 1
+
+[node name="Crypt_block3" parent="Control2/crypt_list" instance=ExtResource( 10 )]
+BLOCK_NUM = 2
 
 [node name="Control3" type="Control" parent="."]
 margin_left = 1500.0
@@ -231,6 +310,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[connection signal="request_completed" from="HTTPRequest" to="." method="_on_HTTPRequest_request_completed"]
 [connection signal="pressed" from="Control/return" to="." method="_on_return_pressed"]
 [connection signal="text_changed" from="Control/player_name" to="." method="_renew_buttons"]
 [connection signal="toggled" from="Control/normal" to="." method="_renew_buttons"]

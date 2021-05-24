@@ -4,16 +4,29 @@ enum {LEFT, MIDDLE, RIGHT}
 enum {Cadence, Melody, Aria, Dorian, Eli, Monk, Dove, Coda, Bolt, Bard, Nocturna, Diamond, Mary, Tempo, Reaper}
 onready var camera = get_node("Camera2D")
 
+onready var http_request = get_node("HTTPRequest")
+
 onready var font_maximum : DynamicFont = load("res://necrosans/font_maximum.tres")
 onready var font_large : DynamicFont = load("res://necrosans/font_large.tres")
 onready var font_medium : DynamicFont = load("res://necrosans/font_medium.tres")
 onready var font_small : DynamicFont = load("res://necrosans/font_small.tres")
 # onready var font_minimum : DynamicFont = load("res://necrosans/font_minimum.tres")
 
+var searched_crypt : Array = []
+
 func _ready():
 	# Control 1 _ready
 	GUI_player_name.text = LocalCryptSave.username
 	GUI_character_list.select(Cadence)
+	
+	simple_stats.text = ""
+	
+	sync_screen_size()
+	sync_text_size()
+	
+	# Control 2 _ready
+	for block in GUI_crypt_list.get_children() :
+		block._ready()
 	
 	pass
 
@@ -84,7 +97,6 @@ func sync_text_size() -> void:
 	
 	return
 
-
 func move_camera(move_to : int, tween_duration = 0.3) -> void:
 	var tween = camera.get_node("Tween")
 	
@@ -131,6 +143,8 @@ onready var GUI_character_list = get_node("Control/character_list")
 onready var button_search = get_node("Control/search")
 onready var button_detail = get_node("Control/detail")
 
+onready var simple_stats = get_node("Control/simple_stats")
+
 func _on_normal_toggled(button_pressed):
 	button_condor.pressed = !button_pressed
 
@@ -155,11 +169,114 @@ func _on_search_pressed():
 	if _get_character_on_GUI() != -1 :
 		search_option.append( _get_character_on_GUI() )
 	else :
-		search_option.append(1) # Default cadence
+		search_option.append(0) # Default cadence
+	
+	# (on control2)
+	_set_search_option_label()
 	
 	# Get player informations from server
+	var basic_adress : String = "http://3.35.91.222:4500/api/data"
+	
+	# http://3.35.91.222:4500/api/data?character=0&mode=0&nick=shortcakesweets
+	http_request.request(basic_adress + "?character=" + str(search_option[2]) + "&mode=" + str(search_option[1]) + "&nick=" + search_option[0])
 	
 	return
+
+# Helper function on server communications
+func _on_HTTPRequest_request_completed(result, response_code, headers, body):
+	searched_crypt.clear()
+	if parse_json(body.get_string_from_utf8()) != null :
+		searched_crypt = parse_json(body.get_string_from_utf8())
+	
+	# Debug
+	for not_parsed_crypt in searched_crypt :
+		print(not_parsed_crypt)
+		print("\n")
+		
+		# not_parsed_crypt is a type "Dictionary"
+	
+	_show_simple_stats()
+
+func _show_simple_stats() -> void:
+	var total_runs : int = searched_crypt.size()
+	if total_runs == 0 :
+		simple_stats.text = "cannot find stats matching that information"
+		button_search.disabled = false
+		button_detail.disabled = true
+		return
+	
+	var cleared_runs : int = 0
+	
+	var all_rta : Array = []
+	var all_igt : Array = []
+	
+	for data in searched_crypt :
+		if data["isWin"] == true :
+			cleared_runs += 1
+			
+			all_rta.append(data["rta"])
+			all_igt.append(data["igt"])
+	
+	var clear_rate : float = float(cleared_runs) / total_runs * 100.0
+	# Debug
+	#print(all_rta)
+	#print(all_igt)
+	
+	var stats_rta = _get_average_and_std(all_rta)
+	var stats_igt = _get_average_and_std(all_igt)
+	
+	var stat_line : Array = []
+	
+	stat_line.append("total runs (clears) : %d (%d)\n" % [total_runs, cleared_runs])
+	stat_line.append("\n")
+	stat_line.append("clear rate : %.2f\n" % clear_rate)
+	stat_line.append("\n")
+	stat_line.append("Average rta : " + _convert_time_to_string(stats_rta[0]) )
+	stat_line.append("\n")
+	stat_line.append("std : " + _convert_time_to_string(stats_rta[1]) )
+	stat_line.append("\n\n")
+	stat_line.append("Average igt : " + _convert_time_to_string(stats_igt[0]) )
+	stat_line.append("\n")
+	stat_line.append("std : " + _convert_time_to_string(stats_igt[1]) )
+	
+	simple_stats.text = ""
+	for line in stat_line :
+		simple_stats.text += line
+	
+	return 
+
+# Helper function of statistics.
+func _get_average_and_std(data : Array) -> Array :
+	if data.size() == 0:
+		return [0,0]
+	
+	var avg : float = 0.0
+	var avg_square : float = 0.0
+	var std : float = 0.0
+	
+	for x in data :
+		if typeof(x) != TYPE_REAL :
+			x = float(x)
+			print(x)
+		
+		avg += x
+		avg_square += x * x
+	
+	avg = avg / data.size()
+	avg_square = avg_square / data.size()
+	
+	std = sqrt( avg_square - avg * avg )
+	
+	return [avg, std]
+
+# Helper function to visualize time(float)
+func _convert_time_to_string(time : float) -> String :
+	var ms = fmod(time, 1) * 1000
+	var seconds = fmod(time,60)
+	var minutes = fmod(time, 3600) / 60
+	var str_elapsed = "%02d:%02d.%02d" % [minutes, seconds, ms]
+	
+	return str_elapsed
 
 func _renew_buttons(_button_toggled) -> void:
 	print(" _renew_buttons_triggered ")
@@ -198,6 +315,23 @@ func _get_character_on_GUI() -> int:
 
 onready var middle_control = get_node("Control2")
 
+onready var label_search_option = get_node("Control2/search_option_label2")
+
+onready var GUI_crypt_list = get_node("Control2/crypt_list")
+
+# Change this later
+func _set_search_option_label() -> void:
+	# var search_option : Array = ["Anonymous", Crypt.NORMAL, Cadence]
+	
+	label_search_option.text = ""
+	label_search_option.text += "player : " + search_option[0]
+	label_search_option.text += "\n"
+	label_search_option.text += "character : " + "Cadence"
+	label_search_option.text += "\n"
+	label_search_option.text += "mod : " + "Normal"
+	
+	pass
+
 
 
 ###############################################
@@ -205,3 +339,6 @@ onready var middle_control = get_node("Control2")
 ###############################################
 
 onready var right_control = get_node("Control3")
+
+
+
