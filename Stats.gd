@@ -13,6 +13,7 @@ onready var font_small : DynamicFont = load("res://necrosans/font_small.tres")
 # onready var font_minimum : DynamicFont = load("res://necrosans/font_minimum.tres")
 
 var searched_crypt : Array = []
+var JSON_parsed_searched_crypt : JSONParseResult
 
 func _ready():
 	# Control 1 _ready
@@ -25,7 +26,7 @@ func _ready():
 	sync_text_size()
 	
 	# Control 2 _ready
-	for block in GUI_crypt_list.get_children() :
+	for block in GUI_crypt_list.get_children() : # Resize GUI
 		block._ready()
 	
 	pass
@@ -152,6 +153,9 @@ func _on_condor_toggled(button_pressed):
 	button_normal.pressed = !button_pressed
 
 func _on_detail_pressed():
+	# Control2
+	_set_control2_init()
+	
 	move_camera(MIDDLE)
 
 func _on_search_pressed():
@@ -172,7 +176,7 @@ func _on_search_pressed():
 		search_option.append(0) # Default cadence
 	
 	# (on control2)
-	_set_search_option_label()
+	#_set_search_option_label()
 	
 	# Get player informations from server
 	var basic_adress : String = "http://3.35.91.222:4500/api/data"
@@ -183,10 +187,14 @@ func _on_search_pressed():
 	return
 
 # Helper function on server communications
-func _on_HTTPRequest_request_completed(result, response_code, headers, body):
+func _on_HTTPRequest_request_completed(_result, _response_code, _headers, body):
 	searched_crypt.clear()
 	if parse_json(body.get_string_from_utf8()) != null :
 		searched_crypt = parse_json(body.get_string_from_utf8())
+	
+#	if JSON.parse( body.get_string_from_utf8() ) != null :
+#		JSON_parsed_searched_crypt = JSON.parse( body.get_string_from_utf8() )
+#
 	
 	# Debug
 	for not_parsed_crypt in searched_crypt :
@@ -313,11 +321,13 @@ func _get_character_on_GUI() -> int:
 ############## Control 2 implement ############
 ###############################################
 
+var curr_page : int = 1
+var total_page : int
+
 onready var middle_control = get_node("Control2")
-
 onready var label_search_option = get_node("Control2/search_option_label2")
-
 onready var GUI_crypt_list = get_node("Control2/crypt_list")
+onready var GUI_current_page = get_node("Control2/current_page")
 
 # Change this later
 func _set_search_option_label() -> void:
@@ -332,13 +342,77 @@ func _set_search_option_label() -> void:
 	
 	pass
 
+func _set_control2_init() -> void:
+	_set_search_option_label()
+	
+	curr_page = 1
+	write_page(curr_page)
+	
+	var total_crypt_num : int = searched_crypt.size()
+	total_page = ceil( float(total_crypt_num) / 3.0 )
+	
+	return
 
+func write_page(page_idx : int) -> void:
+	var block_1 = get_node("Control2/crypt_list/Crypt_block1")
+	var block_2 = get_node("Control2/crypt_list/Crypt_block2")
+	var block_3 = get_node("Control2/crypt_list/Crypt_block3")
+	
+	var block_array = [block_1, block_2, block_3]
+	
+	for i in range(3) :
+		if block_array[i] == null :
+			print(" Error : Block not detected ")
+			return
+		
+		var block = block_array[i]
+		
+		if (page_idx - 1) * 3 + i >= searched_crypt.size() :
+			block.set_data() # set to null data
+		else :
+			var target_crypt : Dictionary = searched_crypt[(page_idx - 1) * 3 + i]
+			
+#			block.set_death(target_crypt["death"])
+#			block.set_runtime(float(target_crypt["rta"]), float(target_crypt["igt"]))
+#			block.set_build( parse_json(target_crypt["build"]) )
+			
+			block.set_data(target_crypt["death"], float(target_crypt["rta"]), float(target_crypt["igt"]), parse_json(target_crypt["build"]) )
+	
+	GUI_current_page.text = str(curr_page)
+	
+	
+	pass
+
+func _on_page_changer_pressed(delta : int):
+	# p_prev : -5
+	# prev : -1
+	# next : 1
+	# n_next : 5
+	
+	curr_page += delta
+	
+	if curr_page <= 0 :
+		curr_page = 1
+	elif curr_page > total_page :
+		curr_page = total_page
+	
+	write_page(curr_page)
+	
+	return
+
+func _on_prev_page_pressed(extra_arg_0):
+	move_camera(LEFT)
 
 ###############################################
 ############## Control 3 implement ############
 ###############################################
 
 onready var right_control = get_node("Control3")
+
+
+
+
+
 
 
 

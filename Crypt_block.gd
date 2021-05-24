@@ -20,16 +20,12 @@ onready var font_small : DynamicFont = load("res://necrosans/font_small.tres")
 # onready var font_minimum : DynamicFont = load("res://necrosans/font_minimum.tres")
 
 func _ready():
-	# Ratio of anchor
-	#var parent_anchor_size = get_parent_anchor()
-	
 	var pixel_size = get_parent_rect()
-	print(pixel_size)
-	
-	# Default is to set anchor size by 5 : 2
 	resize(pixel_size.x, pixel_size.y)
 	
 	sync_text_size()
+	
+	set_color(Color.aqua) # Default
 	
 	pass
 
@@ -49,7 +45,7 @@ func set_block_data(crypt : Crypt) -> void:
 
 func get_parent_rect() -> Vector2 :
 	var parent = get_node("..")
-	print(parent.rect_size)
+	#print(parent.rect_size)
 	
 	if "rect_size" in parent :
 		return parent.rect_size
@@ -69,20 +65,27 @@ func resize(width = 500, height = 200) -> void:
 	# Default settings
 	#  width = 500, height = 200 (all parameters are altered by these. width : height is always 5:2)
 	
+	# Debug
+	#print(" Parent Pixel Size : ")
+	#print(width, height)
+	
 	var anchor_ratio : float
 	var Origin : Vector2
+	var Margin : float
 	
 	if height != 0 :
 		anchor_ratio = (width * 0.4) / height
+		print(anchor_ratio)
 	else :
 		anchor_ratio = 0.4
 	
-	Origin = Vector2.ZERO + Vector2(0, width * 0.4) * (BLOCK_NUM)
+	# Default margin = 0.05
+	Margin = 0.05
 	
-	self.anchor_bottom = anchor_ratio * (BLOCK_NUM + 1)
+	self.anchor_bottom = anchor_ratio * (BLOCK_NUM + 1) + Margin * BLOCK_NUM
 	self.anchor_left = 0
 	self.anchor_right = 1
-	self.anchor_top = anchor_ratio * (BLOCK_NUM)
+	self.anchor_top = anchor_ratio * (BLOCK_NUM) + Margin * BLOCK_NUM
 	
 	self.margin_bottom = 0
 	self.margin_right = 0
@@ -90,6 +93,7 @@ func resize(width = 500, height = 200) -> void:
 	self.margin_left = 0
 	
 	var pixel_size : Vector2 = self.rect_size
+	Origin = Vector2.ZERO
 	
 	#  death_label is set by inspecter.
 	#  GUI_build is set by inspecter.
@@ -98,8 +102,6 @@ func resize(width = 500, height = 200) -> void:
 	outline.points = [Origin, Origin + Vector2(pixel_size.x, 0), Origin + Vector2(pixel_size.x,pixel_size.y), Origin + Vector2(0,pixel_size.y), Origin]
 	inline_vertical.points = [Origin + Vector2(0.4 * pixel_size.x , 0), Origin + Vector2(0.4 * pixel_size.x, pixel_size.y)]
 	inline_horizontal.points = [Origin + Vector2(0.4 * pixel_size.x, 0.5 * pixel_size.y), Origin + Vector2(pixel_size.x, 0.5 * pixel_size.y)]
-	
-	return
 
 func sync_text_size() -> void:
 	# Text size varies by resolution
@@ -149,10 +151,20 @@ func sync_text_size() -> void:
 	
 	return
 
+func set_data(death = "-", rta_time = 0.0, igt_time = 0.0, build = []) -> void :
+	set_death(death)
+	set_runtime(rta_time, igt_time)
+	set_build(build)
+	
+	if rta_time == 0 && igt_time == 0 :
+		set_color(Color.orange)
+	else :
+		set_color(Color.aqua)
+
 func set_death(death : String) -> void:
 	death_label.text = death
 
-func set_runtime(rta_time, igt_time) -> void:
+func set_runtime(rta_time : float, igt_time : float) -> void:
 	
 	var rta_ms = fmod(rta_time, 1) * 1000
 	var rta_seconds = fmod(rta_time, 60)
@@ -162,12 +174,19 @@ func set_runtime(rta_time, igt_time) -> void:
 	var igt_ms = fmod(igt_time, 1) * 1000
 	var igt_seconds = fmod(igt_time,60)
 	var igt_minutes = fmod(igt_time, 3600) / 60
-	var igt_elapsed = "%02d:%02d.%02d" % [rta_minutes, rta_seconds, rta_ms]
+	var igt_elapsed = "%02d:%02d.%02d" % [igt_minutes, igt_seconds, igt_ms]
 	
 	runtime_label.text = rta_elapsed + "\n" + "(igt : " + igt_elapsed + ")"
 
 func set_build(build : Array) -> void:
 	# need implement. wip
+	return
+
+func set_color(color : Color) -> void :
+	outline.default_color = color
+	inline_vertical.default_color = color
+	inline_horizontal.default_color = color
+	
 	return
 
 func _get_crypt_by_idx(index : int) -> Crypt:

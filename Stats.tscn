@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://necrosans/necrosans.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/Cadence/cadence_0.png" type="Texture" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://necrosans/font_large.tres" type="DynamicFont" id=8]
 [ext_resource path="res://ND_item_list.gd" type="Script" id=9]
 [ext_resource path="res://Crypt_block.tscn" type="PackedScene" id=10]
+[ext_resource path="res://necrosans/font_small.tres" type="DynamicFont" id=11]
 
 [sub_resource type="DynamicFont" id=1]
 size = 36
@@ -56,9 +57,9 @@ __meta__ = {
 "font_medium",
 ]]
 anchor_left = 0.75
-anchor_top = 0.02
+anchor_top = 0.05
 anchor_right = 0.95
-anchor_bottom = 0.05
+anchor_bottom = 0.1
 custom_fonts/font = SubResource( 1 )
 text = "return"
 __meta__ = {
@@ -248,6 +249,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="prev_page" type="Button" parent="Control2"]
+anchor_left = 0.05
+anchor_top = 0.05
+anchor_right = 0.25
+anchor_bottom = 0.1
+custom_fonts/font = ExtResource( 7 )
+text = "prev"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="search_option_label" type="Label" parent="Control2" groups=[
 "font_medium",
 ]]
@@ -293,14 +305,79 @@ anchor_left = 0.05
 anchor_top = 0.25
 anchor_right = 0.95
 anchor_bottom = 0.8
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Crypt_block" parent="Control2/crypt_list" instance=ExtResource( 10 )]
+[node name="Crypt_block1" parent="Control2/crypt_list" instance=ExtResource( 10 )]
+anchor_right = 0.749
+anchor_bottom = 0.288
 
 [node name="Crypt_block2" parent="Control2/crypt_list" instance=ExtResource( 10 )]
+anchor_top = 0.324
+anchor_right = 0.742
+anchor_bottom = 0.643
 BLOCK_NUM = 1
 
 [node name="Crypt_block3" parent="Control2/crypt_list" instance=ExtResource( 10 )]
+anchor_top = 0.651
+anchor_right = 0.727
+anchor_bottom = 0.91
 BLOCK_NUM = 2
+
+[node name="p_prev" type="Button" parent="Control2"]
+anchor_left = 0.1
+anchor_top = 0.9
+anchor_right = 0.2
+anchor_bottom = 0.95
+custom_fonts/font = ExtResource( 7 )
+text = "<<"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="prev" type="Button" parent="Control2"]
+anchor_left = 0.25
+anchor_top = 0.9
+anchor_right = 0.35
+anchor_bottom = 0.95
+custom_fonts/font = ExtResource( 7 )
+text = "<"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="next" type="Button" parent="Control2"]
+anchor_left = 0.65
+anchor_top = 0.9
+anchor_right = 0.75
+anchor_bottom = 0.95
+custom_fonts/font = ExtResource( 7 )
+text = ">"
+
+[node name="n_next" type="Button" parent="Control2"]
+anchor_left = 0.8
+anchor_top = 0.9
+anchor_right = 0.9
+anchor_bottom = 0.95
+custom_fonts/font = ExtResource( 7 )
+text = ">>"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="current_page" type="LineEdit" parent="Control2"]
+anchor_left = 0.45
+anchor_top = 0.9
+anchor_right = 0.55
+anchor_bottom = 0.95
+custom_fonts/font = ExtResource( 11 )
+text = "1"
+align = 1
+editable = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Control3" type="Control" parent="."]
 margin_left = 1500.0
@@ -313,10 +390,15 @@ __meta__ = {
 [connection signal="request_completed" from="HTTPRequest" to="." method="_on_HTTPRequest_request_completed"]
 [connection signal="pressed" from="Control/return" to="." method="_on_return_pressed"]
 [connection signal="text_changed" from="Control/player_name" to="." method="_renew_buttons"]
-[connection signal="toggled" from="Control/normal" to="." method="_renew_buttons"]
 [connection signal="toggled" from="Control/normal" to="." method="_on_normal_toggled"]
-[connection signal="toggled" from="Control/condor" to="." method="_renew_buttons"]
+[connection signal="toggled" from="Control/normal" to="." method="_renew_buttons"]
 [connection signal="toggled" from="Control/condor" to="." method="_on_condor_toggled"]
+[connection signal="toggled" from="Control/condor" to="." method="_renew_buttons"]
 [connection signal="item_selected" from="Control/character_list" to="." method="_renew_buttons"]
 [connection signal="pressed" from="Control/search" to="." method="_on_search_pressed"]
 [connection signal="pressed" from="Control/detail" to="." method="_on_detail_pressed"]
+[connection signal="pressed" from="Control2/prev_page" to="." method="_on_prev_page_pressed" binds= [ 0 ]]
+[connection signal="pressed" from="Control2/p_prev" to="." method="_on_page_changer_pressed" binds= [ -5 ]]
+[connection signal="pressed" from="Control2/prev" to="." method="_on_page_changer_pressed" binds= [ -1 ]]
+[connection signal="pressed" from="Control2/next" to="." method="_on_page_changer_pressed" binds= [ 1 ]]
+[connection signal="pressed" from="Control2/n_next" to="." method="_on_page_changer_pressed" binds= [ 5 ]]

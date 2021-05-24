@@ -247,6 +247,10 @@ func parse_build(build):
 			"where" : build[i].where,
 			"how" : build[i].how
 		})
+		
+	# Debug
+	print( typeof(temp[0]) == TYPE_DICTIONARY )
+	
 	return temp
 	
 func _on_post_pressed():
