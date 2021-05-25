@@ -1,6 +1,6 @@
 extends Node2D
 
-enum {LEFT, RIGHT}
+enum {LEFT, MIDDLE, RIGHT}
 onready var camera = get_node("Camera2D")
 
 onready var font_maximum : DynamicFont = load("res://necrosans/font_maximum.tres")
@@ -25,6 +25,8 @@ func _ready():
 	set_GUI_from_data(crypt_raw)
 	
 	label_current_user.text = "current user : " + LocalCryptSave.username
+	
+	preview_block._ready()
 
 # Here, sync_screen_size() also takes part of resizing icons.
 func sync_screen_size():
@@ -36,6 +38,10 @@ func sync_screen_size():
 	right_control.margin_left = width
 	right_control.margin_right = width * 2
 	right_control.margin_bottom = height
+	
+	last_control.margin_left = width * 2
+	last_control.margin_right = width * 3
+	last_control.margin_bottom = height
 	
 	animated_sprite.position = Vector2( width, height ) * 0.15
 	animated_sprite.scale = Vector2(1,1) * float(width / 240.0)
@@ -131,7 +137,10 @@ func move_camera(move_to : int, tween_duration = 0.3) -> void:
 		init_pos = Vector2(get_viewport().size.x, 0)
 		final_pos = Vector2.ZERO
 	elif move_to == RIGHT :
-		init_pos = Vector2.ZERO
+		init_pos = Vector2(get_viewport().size.x, 0)
+		final_pos = Vector2(2 * get_viewport().size.x, 0)
+	elif move_to == MIDDLE :
+		init_pos = camera.position
 		final_pos = Vector2(get_viewport().size.x, 0)
 	else :
 		return
@@ -180,8 +189,8 @@ func _on_igt_give_igt(time):
 	#print(crypt_raw.rta)
 	#print(time)
 
-func _on_next_page_pressed():
-	move_camera(RIGHT)
+func _on_next_page_pressed(idx : int):
+	move_camera(idx)
 
 func _on_return_pressed():
 	# Print a caution message
@@ -206,13 +215,13 @@ onready var GUI_view_how = get_node("Control2/view_how")
 
 onready var GUI_label_showing_build = get_node("Control2/add_to_build/added_build_label")
 
-onready var Button_post = get_node("Control2/post")
+onready var Button_post = get_node("Control3/post")
 onready var Button_prev_page = get_node("Control2/prev_page")
 onready var Button_add_build = get_node("Control2/add_to_build")
 onready var Button_delete_build = get_node("Control2/delete_build")
 
 # Web connection error message handling
-onready var web_connection_error_label = get_node("Control2/post/web_error_label")
+onready var web_connection_error_label = get_node("Control3/post/web_error_label")
 
 var build_raw : Crypt.Build = Crypt.Build.new()
 
@@ -236,9 +245,6 @@ func _button_control(isPost : bool) :
 	Button_add_build.disabled = isPost
 	Button_delete_build.disabled = isPost
 
-func _on_prev_page_pressed():
-	move_camera(LEFT)
-
 func parse_build(build):
 	var temp = []
 	for i in range(0,len(build)):
@@ -249,7 +255,7 @@ func parse_build(build):
 		})
 		
 	# Debug
-	print( typeof(temp[0]) == TYPE_DICTIONARY )
+	#print( typeof(temp[0]) == TYPE_DICTIONARY )
 	
 	return temp
 	
@@ -391,6 +397,17 @@ func print_build_in_sentence() -> void:
 		
 	GUI_label_showing_build.text = full_sentence
 
+###########################################
+########### Control 3 implement ###########
+###########################################
 
+onready var last_control = get_node("Control3")
+onready var seed_varience_control = get_node("Control3/seed_varience_control")
+onready var preview_block = get_node("Control3/semi_control/Crypt_block")
 
-
+# activates when next_page (on control2) is pressed.
+func _set_preview_block_data():
+	cook_crypt_from_GUI() # cooks crypt_raw
+	
+	# Currently the build array type is not convertable. fix later
+	preview_block.set_data(crypt_raw.death, crypt_raw.rta, crypt_raw.igt, [])

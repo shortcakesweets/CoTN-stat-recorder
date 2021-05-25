@@ -1,4 +1,4 @@
-[gd_scene load_steps=152 format=2]
+[gd_scene load_steps=154 format=2]
 
 [ext_resource path="res://Edit_Run.gd" type="Script" id=1]
 [ext_resource path="res://assets/Cadence/cadence_2.png" type="Texture" id=2]
@@ -133,6 +133,8 @@
 [ext_resource path="res://assets/item_icons/shovel/crystal.png" type="Texture" id=131]
 [ext_resource path="res://assets/item_icons/spell/transmute_spell.png" type="Texture" id=132]
 [ext_resource path="res://necrosans/font_medium.tres" type="DynamicFont" id=133]
+[ext_resource path="res://Crypt_block.tscn" type="PackedScene" id=134]
+[ext_resource path="res://seed_varience_control.gd" type="Script" id=135]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -210,15 +212,15 @@ font_data = ExtResource( 6 )
 size = 24
 font_data = ExtResource( 6 )
 
-[sub_resource type="DynamicFont" id=16]
-font_data = ExtResource( 6 )
-
 [sub_resource type="DynamicFont" id=17]
 size = 36
 font_data = ExtResource( 6 )
 
 [sub_resource type="DynamicFont" id=18]
 size = 24
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=16]
 font_data = ExtResource( 6 )
 
 [node name="Edit_Run" type="Node2D"]
@@ -418,7 +420,7 @@ anchor_top = 0.9
 anchor_right = 0.65
 anchor_bottom = 0.95
 custom_fonts/font = SubResource( 12 )
-text = "Next Page (1/2)"
+text = "Next Page (1/3)"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -561,35 +563,20 @@ anchor_top = 0.9
 anchor_right = 0.4
 anchor_bottom = 0.95
 custom_fonts/font = SubResource( 12 )
-text = "prev page (2/2)"
+text = "prev page (2/3)"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="post" type="Button" parent="Control2" groups=[
+[node name="next_page" type="Button" parent="Control2" groups=[
 "font_small",
 ]]
 anchor_left = 0.6
 anchor_top = 0.9
 anchor_right = 0.85
 anchor_bottom = 0.95
-margin_left = -3.05176e-05
 custom_fonts/font = SubResource( 12 )
-text = "post"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="web_error_label" type="Label" parent="Control2/post"]
-anchor_left = -0.501
-anchor_top = -1.188
-anchor_right = 1.381
-anchor_bottom = -0.15
-margin_left = -0.0624924
-margin_top = 0.00200653
-margin_right = 0.0625
-margin_bottom = -0.0249996
-custom_fonts/font = SubResource( 16 )
+text = "Next Page (1/3)"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -640,8 +627,9 @@ __meta__ = {
 [node name="User" type="Label" parent="Control2" groups=[
 "font_medium",
 ]]
+anchor_left = 1.0
 anchor_top = 0.95
-anchor_right = 1.0
+anchor_right = 2.0
 anchor_bottom = 1.0
 custom_fonts/font = ExtResource( 133 )
 text = "current user : Anonymous"
@@ -651,6 +639,179 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Control3" type="Control" parent="."]
+margin_left = 1500.0
+margin_right = 2250.0
+margin_bottom = 1330.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="post" type="Button" parent="Control3" groups=[
+"font_small",
+]]
+anchor_left = 0.6
+anchor_top = 0.9
+anchor_right = 0.85
+anchor_bottom = 0.95
+custom_fonts/font = SubResource( 12 )
+text = "post"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="web_error_label" type="Label" parent="Control3/post"]
+anchor_left = -0.501
+anchor_top = -1.188
+anchor_right = 1.381
+anchor_bottom = -0.15
+margin_left = -0.0624924
+margin_top = 0.00200653
+margin_right = 0.0625
+margin_bottom = -0.0249996
+custom_fonts/font = SubResource( 16 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="prev_page" type="Button" parent="Control3" groups=[
+"font_small",
+]]
+anchor_left = 0.15
+anchor_top = 0.9
+anchor_right = 0.4
+anchor_bottom = 0.95
+custom_fonts/font = SubResource( 12 )
+text = "prev page (3/3)"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="seed_varience_control" type="Control" parent="Control3"]
+anchor_left = 0.05
+anchor_top = 0.1
+anchor_right = 0.95
+anchor_bottom = 0.4
+script = ExtResource( 135 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Control3/seed_varience_control" groups=[
+"font_medium",
+]]
+anchor_right = 1.0
+anchor_bottom = 0.1
+custom_fonts/font = ExtResource( 133 )
+text = "seed varience"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CheckBox_Peace" type="CheckBox" parent="Control3/seed_varience_control" groups=[
+"font_medium",
+]]
+anchor_top = 0.2
+anchor_right = 0.3
+anchor_bottom = 0.4
+custom_fonts/font = ExtResource( 133 )
+text = " in"
+icon = ExtResource( 122 )
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LineEdit" type="LineEdit" parent="Control3/seed_varience_control/CheckBox_Peace"]
+anchor_left = 1.0
+anchor_right = 2.378
+anchor_bottom = 1.0
+margin_left = 19.6697
+margin_top = 3.99097
+margin_right = -18.0063
+margin_bottom = -2.00903
+custom_fonts/font = ExtResource( 133 )
+text = "1-1"
+align = 1
+max_length = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CheckBox_Space" type="CheckBox" parent="Control3/seed_varience_control" groups=[
+"font_medium",
+]]
+anchor_top = 0.5
+anchor_right = 0.3
+anchor_bottom = 0.7
+custom_fonts/font = ExtResource( 133 )
+text = " in"
+icon = ExtResource( 82 )
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LineEdit" type="LineEdit" parent="Control3/seed_varience_control/CheckBox_Space"]
+anchor_left = 1.0
+anchor_right = 2.378
+anchor_bottom = 1.0
+margin_left = 19.6697
+margin_top = 3.99097
+margin_right = -18.0063
+margin_bottom = -2.00903
+custom_fonts/font = ExtResource( 133 )
+text = "1-2"
+align = 1
+max_length = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CheckBox_Shop" type="CheckBox" parent="Control3/seed_varience_control" groups=[
+"font_medium",
+]]
+anchor_top = 0.8
+anchor_right = 0.3
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 133 )
+text = " in"
+icon = ExtResource( 44 )
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LineEdit" type="LineEdit" parent="Control3/seed_varience_control/CheckBox_Shop"]
+anchor_left = 1.0
+anchor_right = 2.378
+anchor_bottom = 1.0
+margin_left = 19.6697
+margin_top = 3.99097
+margin_right = -18.0063
+margin_bottom = -2.00903
+custom_fonts/font = ExtResource( 133 )
+text = "1-3"
+align = 1
+max_length = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="semi_control" type="Control" parent="Control3"]
+anchor_left = 0.05
+anchor_top = 0.5
+anchor_right = 0.95
+anchor_bottom = 0.7
+
+[node name="Crypt_block" parent="Control3/semi_control" instance=ExtResource( 134 )]
+anchor_right = 0.826
+anchor_bottom = 0.744
+margin_right = -61.55
+margin_bottom = 0.095993
+
 [connection signal="give_igt" from="Control/igt" to="." method="_on_igt_give_igt"]
 [connection signal="text_entered" from="Control/igt/minute" to="Control/igt" method="_text_entered"]
 [connection signal="text_entered" from="Control/igt/second" to="Control/igt" method="_text_entered"]
@@ -658,12 +819,18 @@ __meta__ = {
 [connection signal="toggled" from="Control/normal" to="." method="_on_normal_toggled"]
 [connection signal="toggled" from="Control/condor" to="." method="_on_condor_toggled"]
 [connection signal="item_selected" from="Control/death" to="." method="_on_death_item_selected"]
-[connection signal="pressed" from="Control/next_page" to="." method="_on_next_page_pressed"]
+[connection signal="pressed" from="Control/next_page" to="." method="_on_next_page_pressed" binds= [ 1 ]]
 [connection signal="pressed" from="Control/return" to="." method="_on_return_pressed"]
 [connection signal="item_selected" from="Control2/build_maker/item" to="." method="_on_item_item_selected"]
 [connection signal="item_selected" from="Control2/build_maker/floor" to="." method="_on_floor_item_selected"]
 [connection signal="item_selected" from="Control2/build_maker/how" to="." method="_on_how_item_selected"]
-[connection signal="pressed" from="Control2/prev_page" to="." method="_on_prev_page_pressed"]
-[connection signal="pressed" from="Control2/post" to="." method="_on_post_pressed"]
+[connection signal="pressed" from="Control2/prev_page" to="." method="_on_next_page_pressed" binds= [ 0 ]]
+[connection signal="pressed" from="Control2/next_page" to="." method="_set_preview_block_data"]
+[connection signal="pressed" from="Control2/next_page" to="." method="_on_next_page_pressed" binds= [ 2 ]]
 [connection signal="pressed" from="Control2/add_to_build" to="." method="_on_add_to_build_pressed"]
 [connection signal="pressed" from="Control2/delete_build" to="." method="_on_delete_build_pressed"]
+[connection signal="pressed" from="Control3/post" to="." method="_on_post_pressed"]
+[connection signal="pressed" from="Control3/prev_page" to="." method="_on_next_page_pressed" binds= [ 1 ]]
+[connection signal="toggled" from="Control3/seed_varience_control/CheckBox_Peace" to="Control3/seed_varience_control" method="_on_CheckBox_toggled" binds= [ 0 ]]
+[connection signal="toggled" from="Control3/seed_varience_control/CheckBox_Space" to="Control3/seed_varience_control" method="_on_CheckBox_toggled" binds= [ 1 ]]
+[connection signal="toggled" from="Control3/seed_varience_control/CheckBox_Shop" to="Control3/seed_varience_control" method="_on_CheckBox_toggled" binds= [ 2 ]]

@@ -400,19 +400,15 @@ func _on_page_changer_pressed(delta : int):
 	
 	return
 
-func _on_prev_page_pressed(extra_arg_0):
-	move_camera(LEFT)
+func _on_prev_page_pressed(idx):
+	move_camera(idx)
 
 ###############################################
 ############## Control 3 implement ############
 ###############################################
 
 onready var right_control = get_node("Control3")
+onready var label_seed = get_node("Control3/seed")
+onready var label_comments = get_node("Control3/comments")
 
-
-
-
-
-
-
-
+# still implementing.

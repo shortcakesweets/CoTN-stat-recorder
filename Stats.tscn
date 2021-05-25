@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://necrosans/necrosans.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/Cadence/cadence_0.png" type="Texture" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://ND_item_list.gd" type="Script" id=9]
 [ext_resource path="res://Crypt_block.tscn" type="PackedScene" id=10]
 [ext_resource path="res://necrosans/font_small.tres" type="DynamicFont" id=11]
+[ext_resource path="res://necrosans/font_maximum.tres" type="DynamicFont" id=12]
 
 [sub_resource type="DynamicFont" id=1]
 size = 36
@@ -249,7 +250,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="prev_page" type="Button" parent="Control2"]
+[node name="prev_page" type="Button" parent="Control2" groups=[
+"font_medium",
+]]
 anchor_left = 0.05
 anchor_top = 0.05
 anchor_right = 0.25
@@ -325,7 +328,9 @@ anchor_right = 0.727
 anchor_bottom = 0.91
 BLOCK_NUM = 2
 
-[node name="p_prev" type="Button" parent="Control2"]
+[node name="p_prev" type="Button" parent="Control2" groups=[
+"font_medium",
+]]
 anchor_left = 0.1
 anchor_top = 0.9
 anchor_right = 0.2
@@ -336,7 +341,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="prev" type="Button" parent="Control2"]
+[node name="prev" type="Button" parent="Control2" groups=[
+"font_medium",
+]]
 anchor_left = 0.25
 anchor_top = 0.9
 anchor_right = 0.35
@@ -347,7 +354,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="next" type="Button" parent="Control2"]
+[node name="next" type="Button" parent="Control2" groups=[
+"font_medium",
+]]
 anchor_left = 0.65
 anchor_top = 0.9
 anchor_right = 0.75
@@ -355,7 +364,9 @@ anchor_bottom = 0.95
 custom_fonts/font = ExtResource( 7 )
 text = ">"
 
-[node name="n_next" type="Button" parent="Control2"]
+[node name="n_next" type="Button" parent="Control2" groups=[
+"font_medium",
+]]
 anchor_left = 0.8
 anchor_top = 0.9
 anchor_right = 0.9
@@ -366,7 +377,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="current_page" type="LineEdit" parent="Control2"]
+[node name="current_page" type="LineEdit" parent="Control2" groups=[
+"font_medium",
+]]
 anchor_left = 0.45
 anchor_top = 0.9
 anchor_right = 0.55
@@ -387,13 +400,87 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="prev_page" type="Button" parent="Control3" groups=[
+"font_medium",
+]]
+anchor_left = 0.05
+anchor_top = 0.05
+anchor_right = 0.25
+anchor_bottom = 0.1
+custom_fonts/font = ExtResource( 7 )
+text = "prev"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Control3" groups=[
+"font_maximum",
+]]
+anchor_top = 0.1
+anchor_right = 1.0
+anchor_bottom = 0.2
+custom_fonts/font = ExtResource( 12 )
+text = "run summary"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="seed" type="Label" parent="Control3" groups=[
+"font_large",
+]]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.6
+custom_fonts/font = ExtResource( 8 )
+text = "seed : 123456"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="comments" type="Label" parent="Control3" groups=[
+"font_large",
+]]
+anchor_top = 0.6
+anchor_right = 1.0
+anchor_bottom = 0.9
+custom_fonts/font = ExtResource( 8 )
+text = "build and seed variences"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="semi_control" type="Control" parent="Control3"]
+anchor_left = 0.05
+anchor_top = 0.25
+anchor_right = 0.95
+anchor_bottom = 0.45
+margin_left = -8.48535
+margin_top = 0.037674
+margin_right = -0.235413
+margin_bottom = 0.137665
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Crypt_block" parent="Control3/semi_control" instance=ExtResource( 10 )]
+anchor_right = 0.785
+anchor_bottom = 0.745
+margin_right = -0.226196
+margin_bottom = -0.109787
+
 [connection signal="request_completed" from="HTTPRequest" to="." method="_on_HTTPRequest_request_completed"]
 [connection signal="pressed" from="Control/return" to="." method="_on_return_pressed"]
 [connection signal="text_changed" from="Control/player_name" to="." method="_renew_buttons"]
-[connection signal="toggled" from="Control/normal" to="." method="_on_normal_toggled"]
 [connection signal="toggled" from="Control/normal" to="." method="_renew_buttons"]
-[connection signal="toggled" from="Control/condor" to="." method="_on_condor_toggled"]
+[connection signal="toggled" from="Control/normal" to="." method="_on_normal_toggled"]
 [connection signal="toggled" from="Control/condor" to="." method="_renew_buttons"]
+[connection signal="toggled" from="Control/condor" to="." method="_on_condor_toggled"]
 [connection signal="item_selected" from="Control/character_list" to="." method="_renew_buttons"]
 [connection signal="pressed" from="Control/search" to="." method="_on_search_pressed"]
 [connection signal="pressed" from="Control/detail" to="." method="_on_detail_pressed"]
@@ -402,3 +489,4 @@ __meta__ = {
 [connection signal="pressed" from="Control2/prev" to="." method="_on_page_changer_pressed" binds= [ -1 ]]
 [connection signal="pressed" from="Control2/next" to="." method="_on_page_changer_pressed" binds= [ 1 ]]
 [connection signal="pressed" from="Control2/n_next" to="." method="_on_page_changer_pressed" binds= [ 5 ]]
+[connection signal="pressed" from="Control3/prev_page" to="." method="_on_prev_page_pressed" binds= [ 1 ]]
