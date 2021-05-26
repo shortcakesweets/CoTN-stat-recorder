@@ -29,6 +29,9 @@ func _ready():
 	for block in GUI_crypt_list.get_children() : # Resize GUI
 		block._ready()
 	
+	# Control 3 _ready
+	summary_block._ready()
+	
 	pass
 
 func sync_screen_size():
@@ -403,6 +406,18 @@ func _on_page_changer_pressed(delta : int):
 func _on_prev_page_pressed(idx):
 	move_camera(idx)
 
+func _on_crypt_block_touch_detected(idx) -> void:
+	# detect oob and ignore detection prior.
+	if (curr_page - 1) * 3 + idx >= searched_crypt.size() : #OOB
+		return
+	
+	var target_crypt : Dictionary = searched_crypt[(curr_page - 1) * 3 + idx]
+	write_summary_crypt_block(target_crypt)
+	
+	move_camera(RIGHT) # Goto last page
+	
+	return
+
 ###############################################
 ############## Control 3 implement ############
 ###############################################
@@ -411,4 +426,22 @@ onready var right_control = get_node("Control3")
 onready var label_seed = get_node("Control3/seed")
 onready var label_comments = get_node("Control3/comments")
 
+onready var summary_block = get_node("Control3/semi_control/summary_block")
+
 # still implementing.
+
+func write_summary_crypt_block(target_crypt : Dictionary) -> void :
+	
+	var build = parse_json(target_crypt["build"])
+	summary_block.set_data(target_crypt["death"], float(target_crypt["rta"]), float(target_crypt["igt"]), build )
+	
+	label_seed.text = "seed : " + str(target_crypt["random_seed"])
+	
+	for raw_sentence in build :
+		pass # Implement later
+	
+	return
+
+func _on_summary_block_touch_detected():
+	# goto Record_Crypt with the seed
+	pass

@@ -1,10 +1,11 @@
 extends Control
 
 export var BLOCK_NUM : int = 0
+signal touch_detected
 
-# onready var control = get_node("Control")
 onready var death_label = get_node("death")
 onready var GUI_build = get_node("GUI_Build")
+onready var touchscreen = get_node("touchscreen")
 
 onready var runtime_label = get_node("runtime")
 
@@ -102,6 +103,8 @@ func resize(width = 500, height = 200) -> void:
 	outline.points = [Origin, Origin + Vector2(pixel_size.x, 0), Origin + Vector2(pixel_size.x,pixel_size.y), Origin + Vector2(0,pixel_size.y), Origin]
 	inline_vertical.points = [Origin + Vector2(0.4 * pixel_size.x , 0), Origin + Vector2(0.4 * pixel_size.x, pixel_size.y)]
 	inline_horizontal.points = [Origin + Vector2(0.4 * pixel_size.x, 0.5 * pixel_size.y), Origin + Vector2(pixel_size.x, 0.5 * pixel_size.y)]
+	
+	# touchscreen (button) is set by inspecter
 
 func sync_text_size() -> void:
 	# Text size varies by resolution
@@ -198,3 +201,6 @@ func _get_crypt_by_idx(index : int) -> Crypt:
 	######################################################
 	
 	pass
+
+func _on_touchscreen_pressed():
+	emit_signal("touch_detected")

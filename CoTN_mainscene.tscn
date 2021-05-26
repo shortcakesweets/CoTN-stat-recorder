@@ -97,7 +97,7 @@ __meta__ = {
 position = Vector2( 176, 216 )
 scale = Vector2( 6, 6 )
 frames = SubResource( 1 )
-frame = 2
+frame = 3
 speed_scale = 2.0
 playing = true
 
@@ -125,7 +125,7 @@ anchor_top = 0.95
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_fonts/font = ExtResource( 7 )
-text = "dev 1.2 - stat viewer wip"
+text = "dev 1.22 - stat viewer big updates (wip)"
 align = 1
 valign = 1
 __meta__ = {

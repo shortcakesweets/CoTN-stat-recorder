@@ -427,6 +427,25 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Label2" type="Label" parent="Control3" groups=[
+"font_medium",
+]]
+anchor_left = 0.1
+anchor_top = 0.2
+anchor_right = 0.9
+anchor_bottom = 0.25
+margin_left = -0.142094
+margin_top = -0.0993042
+margin_right = 0.107849
+margin_bottom = 0.640686
+custom_fonts/font = ExtResource( 7 )
+text = "click the box to run this seed!"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="seed" type="Label" parent="Control3" groups=[
 "font_large",
 ]]
@@ -468,7 +487,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Crypt_block" parent="Control3/semi_control" instance=ExtResource( 10 )]
+[node name="summary_block" parent="Control3/semi_control" instance=ExtResource( 10 )]
 anchor_right = 0.785
 anchor_bottom = 0.745
 margin_right = -0.226196
@@ -485,8 +504,12 @@ margin_bottom = -0.109787
 [connection signal="pressed" from="Control/search" to="." method="_on_search_pressed"]
 [connection signal="pressed" from="Control/detail" to="." method="_on_detail_pressed"]
 [connection signal="pressed" from="Control2/prev_page" to="." method="_on_prev_page_pressed" binds= [ 0 ]]
+[connection signal="touch_detected" from="Control2/crypt_list/Crypt_block1" to="." method="_on_crypt_block_touch_detected" binds= [ 0 ]]
+[connection signal="touch_detected" from="Control2/crypt_list/Crypt_block2" to="." method="_on_crypt_block_touch_detected" binds= [ 1 ]]
+[connection signal="touch_detected" from="Control2/crypt_list/Crypt_block3" to="." method="_on_crypt_block_touch_detected" binds= [ 2 ]]
 [connection signal="pressed" from="Control2/p_prev" to="." method="_on_page_changer_pressed" binds= [ -5 ]]
 [connection signal="pressed" from="Control2/prev" to="." method="_on_page_changer_pressed" binds= [ -1 ]]
 [connection signal="pressed" from="Control2/next" to="." method="_on_page_changer_pressed" binds= [ 1 ]]
 [connection signal="pressed" from="Control2/n_next" to="." method="_on_page_changer_pressed" binds= [ 5 ]]
 [connection signal="pressed" from="Control3/prev_page" to="." method="_on_prev_page_pressed" binds= [ 1 ]]
+[connection signal="touch_detected" from="Control3/semi_control/summary_block" to="." method="_on_summary_block_touch_detected"]

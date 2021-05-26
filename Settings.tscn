@@ -50,9 +50,9 @@ __meta__ = {
 "font_medium",
 ]]
 anchor_left = 0.1
-anchor_top = 0.35
+anchor_top = 0.6
 anchor_right = 0.9
-anchor_bottom = 0.45
+anchor_bottom = 0.7
 custom_fonts/font = ExtResource( 3 )
 text = "current font size is set to
  (minimum) n"
@@ -66,9 +66,9 @@ __meta__ = {
 
 [node name="username" type="LineEdit" parent="Control"]
 anchor_left = 0.1
-anchor_top = 0.6
+anchor_top = 0.2
 anchor_right = 0.9
-anchor_bottom = 0.7
+anchor_bottom = 0.3
 margin_left = -0.250008
 margin_top = -0.600037
 margin_bottom = 0.649963
@@ -98,9 +98,9 @@ __meta__ = {
 
 [node name="fontsize_small" type="Button" parent="Control"]
 anchor_left = 0.1
-anchor_top = 0.25
+anchor_top = 0.5
 anchor_right = 0.3
-anchor_bottom = 0.3
+anchor_bottom = 0.55
 margin_left = 0.246521
 margin_top = -0.512085
 margin_right = -0.003479
@@ -113,9 +113,9 @@ __meta__ = {
 
 [node name="fontsize_medium" type="Button" parent="Control"]
 anchor_left = 0.35
-anchor_top = 0.25
+anchor_top = 0.5
 anchor_right = 0.6
-anchor_bottom = 0.3
+anchor_bottom = 0.55
 custom_fonts/font = SubResource( 3 )
 text = "medium"
 __meta__ = {
@@ -124,9 +124,9 @@ __meta__ = {
 
 [node name="fontsize_large" type="Button" parent="Control"]
 anchor_left = 0.65
-anchor_top = 0.25
+anchor_top = 0.5
 anchor_right = 0.9
-anchor_bottom = 0.3
+anchor_bottom = 0.55
 custom_fonts/font = SubResource( 4 )
 text = "large"
 __meta__ = {

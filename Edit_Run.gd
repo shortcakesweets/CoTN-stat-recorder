@@ -402,8 +402,9 @@ func print_build_in_sentence() -> void:
 ###########################################
 
 onready var last_control = get_node("Control3")
-onready var seed_varience_control = get_node("Control3/seed_varience_control")
 onready var preview_block = get_node("Control3/semi_control/Crypt_block")
+
+onready var GUI_comment = get_node("Control3/comments")
 
 # activates when next_page (on control2) is pressed.
 func _set_preview_block_data():
@@ -411,3 +412,6 @@ func _set_preview_block_data():
 	
 	# Currently the build array type is not convertable. fix later
 	preview_block.set_data(crypt_raw.death, crypt_raw.rta, crypt_raw.igt, [])
+
+func GUI_get_comment() :
+	return GUI_comment.text
