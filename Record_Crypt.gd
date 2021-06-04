@@ -18,6 +18,7 @@ onready var button_post = get_node("Control/Label_Timer/Button_Post")
 onready var button_discard = get_node("Control/Label_Timer/Button_Discard")
 onready var button_start = get_node("Control/Label_Timer/start_timer")
 onready var button_random_seed = get_node("Control/Label_Seed/random_seed")
+onready var button_enter_seed = get_node("Control/Label_Seed/enter_seed")
 
 onready var animated_sprite = get_node("Control/AnimatedSprite")
 
@@ -26,6 +27,8 @@ onready var control = get_node("Control")
 onready var five_second_timer = get_node("Five_Second_Timer")
 
 onready var label_current_user = get_node("Control/User")
+
+onready var seed_entry = get_node("Control/seed_entry")
 
 var time : float = 0
 var isTimerOn : bool = false
@@ -96,8 +99,10 @@ func _ready():
 	_reset_timer()
 	five_second_timer.visible = false
 	
-	_on_random_seed_pressed()
+	_on_random_seed_pressed( LocalCryptSave.load_seed() )
 	
+	seed_entry.visible = false
+	seed_entry.editable = false
 	#button_post.disabled = !isTimerOn
 	#button_discard.disabled = !isTimerOn
 	
@@ -130,6 +135,7 @@ func _start_timer():
 	change_timerButton_state(!isTimerOn)
 	
 	button_random_seed.disabled = true
+	button_enter_seed.disabled = true
 
 func _reset_timer():
 	time = 0
@@ -157,6 +163,10 @@ func _process(delta):
 
 func _on_Button_Discard_pressed():
 	_reset_timer()
+	
+	# if seed entry was on, force seed_entry to close
+	if is_confirm :
+		_on_enter_seed_pressed()
 
 func _input(event):
 	if event is InputEventMouseButton :
@@ -169,7 +179,12 @@ func _input(event):
 			#print('single click', event)
 			pass
 
-func _on_random_seed_pressed():
+func _on_random_seed_pressed(target_seed = -1) -> void:
+	if target_seed != -1 : # Not default, 
+		label_seed.text = "Seeded Run\n%d" % target_seed
+		crypt_raw.random_seed = target_seed
+		return
+	
 	rng.randomize()
 	
 	crypt_raw.random_seed = rng.randi_range(10000, 99999999)
@@ -191,9 +206,11 @@ func change_timerButton_state(isPause) :
 	if time != 0:
 		button_start.text = "Resume run"
 		button_random_seed.disabled = true
+		button_enter_seed.disabled = true
 	else :
 		button_start.text = "Start run"
 		button_random_seed.disabled = false
+		button_enter_seed.disabled = false
 
 func _on_start_timer_pressed():
 	_start_timer()
@@ -209,3 +226,30 @@ func _on_Button_Post_pressed():
 	print(LocalCryptSave.crypt_slot)
 	
 	get_tree().change_scene("res://Edit_Run.tscn")
+
+
+var is_confirm : bool = false # only for _on_enter_seed_pressed
+func _on_enter_seed_pressed():
+	
+	seed_entry.visible = !is_confirm
+	seed_entry.editable = !is_confirm
+	
+	if not is_confirm : 
+		seed_entry.text = ""
+		button_enter_seed.text = "confirm seed"
+		
+		# disable all other buttons
+		
+		button_start.disabled = true
+		button_random_seed.disabled = true
+		 
+	else :
+		var entered_seed : int = int(seed_entry.text)
+		_on_random_seed_pressed( entered_seed )
+		button_enter_seed.text = "enter seed"
+		
+		# enable all other buttons
+		button_start.disabled = false
+		button_random_seed.disabled = false
+	
+	is_confirm = !is_confirm # change is_confirm

@@ -59,3 +59,25 @@ func load_userdata() -> bool:
 	save_file.close()
 	
 	return true
+
+##########################################################
+
+# load seed inputs (or daily seeds)
+
+var daily_seed : int
+var seed_loader : int = -1
+
+func save_seed(target_seed : int) -> void:
+	seed_loader = target_seed
+	return
+
+func load_seed() -> int:
+	var target_seed = seed_loader
+	seed_loader = -1 # reset seed_loader
+	
+	return target_seed
+
+
+
+
+

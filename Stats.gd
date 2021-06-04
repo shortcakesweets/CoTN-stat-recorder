@@ -443,5 +443,8 @@ func write_summary_crypt_block(target_crypt : Dictionary) -> void :
 	return
 
 func _on_summary_block_touch_detected():
-	# goto Record_Crypt with the seed
+	LocalCryptSave.save_seed( int(label_seed.text) )
+	get_tree().change_scene("res://Record_Crypt.tscn")
+	
 	pass
+
